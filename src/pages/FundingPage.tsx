@@ -2,7 +2,7 @@ import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section, SectionHeader } from '@/components/Section';
 import { grants, Grant } from '@/data/grants';
-import { DollarSign, Calendar, User, Users, CheckCircle, Clock } from 'lucide-react';
+import { IndianRupee, Calendar, User, Users, CheckCircle, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format, parseISO } from 'date-fns';
 
@@ -46,8 +46,8 @@ function GrantCard({ grant }: GrantCardProps) {
         </div>
         {grant.amount && (
           <div className="flex items-center gap-1.5 text-primary font-semibold">
-            <DollarSign className="w-4 h-4" />
-            {grant.amount.replace('$', '')}
+            <IndianRupee className="w-4 h-4" />
+            {grant.amount.replace('₹', '')}
           </div>
         )}
       </div>
@@ -83,7 +83,7 @@ export default function FundingPage() {
   const completedGrants = grants.filter(g => g.status === 'completed');
 
   const totalOngoing = ongoingGrants.reduce((sum, g) => {
-    const amount = g.amount ? parseFloat(g.amount.replace(/[$,]/g, '')) : 0;
+    const amount = g.amount ? parseFloat(g.amount.replace(/[₹,]/g, '')) : 0;
     return sum + amount;
   }, 0);
 
@@ -99,7 +99,7 @@ export default function FundingPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { value: ongoingGrants.length.toString(), label: 'Active Grants' },
-            { value: `$${(totalOngoing / 1000000).toFixed(1)}M+`, label: 'Ongoing Funding' },
+            { value: `₹${(totalOngoing / 1000000).toFixed(1)}M+`, label: 'Ongoing Funding' },
             { value: completedGrants.length.toString(), label: 'Completed Grants' },
             { value: '7', label: 'Funding Partners' },
           ].map(stat => (

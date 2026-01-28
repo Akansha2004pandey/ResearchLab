@@ -45,15 +45,15 @@ export default function ContactPage() {
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     toast({
       title: 'Message Sent!',
       description: 'Thank you for reaching out. We\'ll get back to you soon.',
     });
-    
+
     setFormData({ name: '', email: '', subject: '', message: '' });
     setIsSubmitting(false);
   };
@@ -81,7 +81,7 @@ export default function ContactPage() {
               <h2 className="text-xl font-heading font-bold text-foreground mb-6">
                 Lab Information
               </h2>
-              
+
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
@@ -90,10 +90,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Address</h3>
                     <p className="text-sm text-muted-foreground">
-                      Room 401, Computer Science Building<br />
-                      University of Technology<br />
-                      123 University Avenue<br />
-                      Tech City, TC 12345
+                      Netaji Subhas University of Technology<br />
+                      Azad Hind Fauj Marg, Dwarka Sector 3<br />
+                      Dwarka, Delhi, 110078
                     </p>
                   </div>
                 </div>
@@ -105,10 +104,10 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Email</h3>
                     <a
-                      href="mailto:ci-lab@university.edu"
+                      href="mailto:ankur.gupta@nsut.ac.in"
                       className="text-sm text-primary hover:underline"
                     >
-                      ci-lab@university.edu
+                      ankur.gupta@nsut.ac.in
                     </a>
                   </div>
                 </div>
@@ -143,7 +142,7 @@ export default function ContactPage() {
             {/* Map Placeholder */}
             <div className="rounded-xl overflow-hidden border border-border aspect-video bg-muted">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007!5e0!3m2!1sen!2sus!4v1645564656514!5m2!1sen!2sus"
+                src="https://maps.google.com/maps?q=Netaji+Subhas+University+of+Technology+Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

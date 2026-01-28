@@ -33,7 +33,7 @@ export function Footer() {
                   Computational Intelligence Lab
                 </span>
                 <span className="block text-sm opacity-70">
-                  University of Technology
+                  Netaji Subhas University of Technology
                 </span>
               </div>
             </Link>
@@ -44,12 +44,12 @@ export function Footer() {
             <div className="flex flex-col gap-2 text-sm opacity-80">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Room 401, Computer Science Building</span>
+                <span>Netaji Subhas University of Technology, Delhi</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
-                <a href="mailto:ci-lab@university.edu" className="hover:opacity-100 transition-opacity">
-                  ci-lab@university.edu
+                <a href="mailto:ankur.gupta@nsut.ac.in" className="hover:opacity-100 transition-opacity">
+                  ankur.gupta@nsut.ac.in
                 </a>
               </div>
             </div>

@@ -21,7 +21,8 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
           alt={person.name}
           className={cn(
             'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
-            featured ? 'aspect-square lg:aspect-auto lg:h-full' : ''
+            featured ? 'aspect-square lg:aspect-auto lg:h-full' : '',
+            person.imageClassName
           )}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -32,7 +33,7 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
           {person.name}
         </h3>
         <p className="text-primary font-medium text-sm mb-3">{person.role}</p>
-        
+
         <p className={cn('text-muted-foreground text-sm mb-4', featured ? 'line-clamp-4' : 'line-clamp-2')}>
           {person.bio}
         </p>

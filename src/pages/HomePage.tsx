@@ -6,11 +6,11 @@ import { researchAreas } from '@/data/research';
 import { publications } from '@/data/publications';
 import { events } from '@/data/events';
 import { news } from '@/data/news';
-import { 
-  ArrowRight, 
-  Users, 
-  BookOpen, 
-  Calendar, 
+import {
+  ArrowRight,
+  Users,
+  BookOpen,
+  Calendar,
   Sparkles,
   Brain,
   MessageSquare,
@@ -44,16 +44,16 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-6 animate-fade-in-up">
               <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">University of Technology</span>
+              <span className="text-sm font-medium text-foreground">Netaji Subhas University of Technology</span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-foreground mb-6 animate-fade-in-up stagger-1">
               Computational<br />
-              <span className="gradient-text">Intelligence Lab</span>
+              <span>Intelligence Lab</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-fade-in-up stagger-2">
-              Advancing the frontiers of artificial intelligence through fundamental research 
+              Advancing the frontiers of artificial intelligence through fundamental research
               and impactful applications. We build intelligent systems that understand, reason, and learn.
             </p>
 
@@ -263,7 +263,7 @@ export default function HomePage() {
               Join Our Research Team
             </h2>
             <p className="text-primary-foreground/80 mb-6">
-              We're always looking for talented researchers, PhD students, and collaborators 
+              We're always looking for talented researchers, PhD students, and collaborators
               who share our passion for advancing AI. Explore opportunities to work with us.
             </p>
             <div className="flex flex-wrap gap-4">

@@ -38,7 +38,7 @@ export const events: LabEvent[] = [
     type: "workshop",
     date: "2025-01-20",
     endDate: "2025-01-22",
-    venue: "University Conference Center",
+    venue: "Main Auditorium, NSUT",
     description: "Three-day intensive workshop on the latest advances in machine learning.",
     fullDescription: "Our flagship annual workshop brings together researchers from academia and industry to discuss cutting-edge developments in machine learning. Features keynote speeches, paper presentations, poster sessions, and networking events.",
     posterImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",

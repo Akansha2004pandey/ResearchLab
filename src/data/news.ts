@@ -21,7 +21,7 @@ export const news: NewsItem[] = [
   },
   {
     id: "news-2",
-    title: "$2.5M NSF Grant Awarded for Trustworthy ML Research",
+    title: "₹2.5M NSF Grant Awarded for Trustworthy ML Research",
     date: "2024-11-20",
     category: "grant",
     description: "Dr. Vasquez has been awarded a major NSF grant to study the foundations of trustworthy machine learning over the next five years."
@@ -62,7 +62,7 @@ export const news: NewsItem[] = [
     title: "New Partnership with Local Hospital for AI Diagnostics",
     date: "2024-07-10",
     category: "general",
-    description: "We're excited to announce a new partnership with University Hospital to develop and deploy AI diagnostic tools in clinical settings."
+    description: "We're excited to announce a new partnership with NSUT Research Hospital to develop and deploy AI diagnostic tools in clinical settings."
   },
   {
     id: "news-8",
@@ -85,7 +85,7 @@ export const news: NewsItem[] = [
     title: "Microsoft Research Grant for Responsible AI",
     date: "2024-05-15",
     category: "grant",
-    description: "We've received a $400,000 grant from Microsoft Research to develop tools and frameworks for responsible AI development."
+    description: "We've received a ₹400,000 grant from Microsoft Research to develop tools and frameworks for responsible AI development."
   }
 ];
 

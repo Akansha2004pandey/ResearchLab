@@ -12,21 +12,22 @@ export interface Person {
   website?: string;
   yearJoined?: number;
   yearLeft?: number;
+  imageClassName?: string;
 }
 
 export const people: Person[] = [
   {
     id: "pi-1",
-    name: "Dr. Elena Vasquez",
+    name: "Dr. Ankur Gupta",
     role: "Principal Investigator & Professor",
     category: "faculty",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-    bio: "Dr. Vasquez leads the Computational Intelligence Lab with over 15 years of experience in machine learning and artificial intelligence. Her work focuses on developing novel algorithms for complex systems.",
-    researchInterests: ["Machine Learning", "Neural Networks", "Optimization"],
-    email: "e.vasquez@university.edu",
-    googleScholar: "https://scholar.google.com",
-    linkedin: "https://linkedin.com",
-    website: "https://example.com",
+    image: "/professor-ankur-gupta-square.png",
+    bio: "Dr. Gupta leads the lab with extensive experience in his field. His work focuses on developing novel algorithms for complex systems.",
+    researchInterests: ["Machine Learning", "Artificial Intelligence", "Information Systems"],
+    email: "ankur.gupta@nsut.ac.in",
+    googleScholar: "https://scholar.google.com/citations?user=placeholder",
+    linkedin: "https://www.linkedin.com/in/ankursynon/?originalSubdomain=in",
+    website: "https://example.com/dr-ankur-gupta",
     yearJoined: 2010,
   },
   {
@@ -37,7 +38,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
     bio: "Specializes in natural language processing and computational linguistics with a focus on multilingual systems.",
     researchInterests: ["NLP", "Computational Linguistics", "Deep Learning"],
-    email: "m.chen@university.edu",
+    email: "m.chen@nsut.ac.in",
     googleScholar: "https://scholar.google.com",
     yearJoined: 2015,
   },
@@ -49,7 +50,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
     bio: "Researching reinforcement learning applications in robotics and autonomous systems.",
     researchInterests: ["Reinforcement Learning", "Robotics", "Control Systems"],
-    email: "s.mitchell@university.edu",
+    email: "s.mitchell@nsut.ac.in",
     yearJoined: 2021,
   },
   {
@@ -60,7 +61,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
     bio: "Focused on graph neural networks and their applications in drug discovery.",
     researchInterests: ["Graph Neural Networks", "Bioinformatics", "Drug Discovery"],
-    email: "j.wilson@university.edu",
+    email: "j.wilson@nsut.ac.in",
     yearJoined: 2020,
   },
   {
@@ -71,7 +72,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
     bio: "Working on explainable AI and interpretable machine learning models.",
     researchInterests: ["Explainable AI", "Interpretability", "Fairness in ML"],
-    email: "a.patel@university.edu",
+    email: "a.patel@nsut.ac.in",
     yearJoined: 2022,
   },
   {
@@ -82,7 +83,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
     bio: "Exploring computer vision applications in medical imaging.",
     researchInterests: ["Computer Vision", "Medical Imaging", "CNNs"],
-    email: "d.kim@university.edu",
+    email: "d.kim@nsut.ac.in",
     yearJoined: 2023,
   },
   {
@@ -93,7 +94,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
     bio: "Researching federated learning and privacy-preserving machine learning.",
     researchInterests: ["Federated Learning", "Privacy", "Distributed Systems"],
-    email: "e.rodriguez@university.edu",
+    email: "e.rodriguez@nsut.ac.in",
     yearJoined: 2023,
   },
   {
@@ -104,7 +105,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
     bio: "Junior undergraduate student interested in AI ethics and responsible AI.",
     researchInterests: ["AI Ethics", "Responsible AI"],
-    email: "a.thompson@university.edu",
+    email: "a.thompson@nsut.ac.in",
     yearJoined: 2023,
   },
   {
@@ -115,7 +116,7 @@ export const people: Person[] = [
     image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop",
     bio: "Manages day-to-day operations of the lab and coordinates research activities.",
     researchInterests: ["Research Administration", "Project Management"],
-    email: "j.lee@university.edu",
+    email: "j.lee@nsut.ac.in",
     yearJoined: 2018,
   },
   {
