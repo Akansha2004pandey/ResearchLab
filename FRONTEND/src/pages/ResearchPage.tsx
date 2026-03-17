@@ -2,9 +2,12 @@ import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
 import { ResearchCard } from '@/components/ResearchCard';
-import { researchAreas } from '@/data/research';
+import { useResearchAreas } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function ResearchPage() {
+  const { data: researchAreas = [], isLoading } = useResearchAreas();
+
   return (
     <Layout>
       <PageHeader
@@ -13,6 +16,13 @@ export default function ResearchPage() {
       />
 
       <Section>
+        {isLoading && (
+          <div className="grid md:grid-cols-2 gap-8">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-72 rounded-xl" />
+            ))}
+          </div>
+        )}
         <div className="grid md:grid-cols-2 gap-8">
           {researchAreas.map((area, idx) => (
             <div

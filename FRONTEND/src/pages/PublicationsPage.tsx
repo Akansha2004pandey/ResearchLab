@@ -3,7 +3,9 @@ import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
 import { PublicationCard } from '@/components/PublicationCard';
-import { publications, publicationTypes, Publication } from '@/data/publications';
+import { publicationTypes, Publication } from '@/data/publications';
+import { usePublications } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -23,6 +25,8 @@ export default function PublicationsPage() {
   const [activeTab, setActiveTab] = useState<TabType>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
+  const { data: publications = [], isLoading } = usePublications();
+
   const filteredPublications = useMemo(() => {
     let filtered = publications;
 
@@ -41,7 +45,7 @@ export default function PublicationsPage() {
     }
 
     return filtered;
-  }, [activeTab, searchQuery]);
+  }, [activeTab, searchQuery, publications]);
 
   // Group by year
   const publicationsByYear = useMemo(() => {
@@ -98,7 +102,13 @@ export default function PublicationsPage() {
         </div>
 
         {/* Results */}
-        {years.length > 0 ? (
+        {isLoading ? (
+          <div className="space-y-4">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-28 rounded-xl" />
+            ))}
+          </div>
+        ) : years.length > 0 ? (
           <div className="space-y-8">
             {years.map(year => (
               <div key={year}>

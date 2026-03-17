@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 import { Layout } from '@/components/Layout';
 import { Section, SectionHeader } from '@/components/Section';
 import { Button } from '@/components/ui/button';
-import { researchAreas } from '@/data/research';
-import { publications } from '@/data/publications';
-import { events } from '@/data/events';
-import { news } from '@/data/news';
+import { useResearchAreas, usePublications, useEvents, useNews, usePeople, useGrants } from '@/hooks/useLabData';
 import {
   ArrowRight,
   Users,
@@ -26,9 +23,19 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function HomePage() {
+  const { data: researchAreas = [] } = useResearchAreas();
+  const { data: publications = [] } = usePublications();
+  const { data: events = [] } = useEvents();
+  const { data: news = [] } = useNews();
+  const { data: people = [] } = usePeople();
+  const { data: grants = [] } = useGrants();
+
   const featuredPublications = publications.filter(p => p.featured).slice(0, 3);
-  const upcomingEvents = events.filter(e => e.status === 'upcoming').slice(0, 3);
+  const upcomingEvents = events.filter(e => e.status === 'upcoming' || e.status === 'ongoing').slice(0, 3);
   const latestNews = news.slice(0, 4);
+  const ongoingFunding = grants
+    .filter(g => g.status === 'ongoing')
+    .reduce((sum, g) => sum + (g.amount ? parseFloat(g.amount.replace(/[₹,]/g, '')) : 0), 0);
 
   return (
     <Layout>
@@ -72,10 +79,10 @@ export default function HomePage() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 animate-fade-in-up stagger-4">
               {[
-                { value: '50+', label: 'Publications' },
-                { value: '15+', label: 'Team Members' },
-                { value: '$10M+', label: 'Research Funding' },
-                { value: '6', label: 'Research Areas' },
+                { value: `${publications.length}+`, label: 'Publications' },
+                { value: `${people.length}+`, label: 'Team Members' },
+                { value: ongoingFunding ? `₹${(ongoingFunding / 1000000).toFixed(1)}M+` : 'Live', label: 'Research Funding' },
+                { value: `${researchAreas.length}`, label: 'Research Areas' },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="text-3xl md:text-4xl font-heading font-bold text-primary">{stat.value}</div>

@@ -1,0 +1,44 @@
+@baseUrl = http://localhost:4000/api
+
+### Health
+GET {{baseUrl}}/health
+
+### Home summary
+GET {{baseUrl}}/home/summary
+
+### People
+GET {{baseUrl}}/people
+
+### Publications filtered
+GET {{baseUrl}}/publications?type=conference&year=2024
+
+### Contact submit
+POST {{baseUrl}}/contact
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@example.com",
+  "subject": "General Inquiry",
+  "message": "I want to know more about your research collaborations."
+}
+
+### Admin signup
+POST {{baseUrl}}/admin/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Lab Head",
+  "email": "admin.cilab@nsut.ac.in",
+  "password": "Admin@12345",
+  "signupKey": ""
+}
+
+### Admin login
+POST {{baseUrl}}/admin/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin.cilab@nsut.ac.in",
+  "password": "Admin@12345"
+}

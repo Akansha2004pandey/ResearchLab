@@ -1,7 +1,9 @@
 import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section, SectionHeader } from '@/components/Section';
-import { grants, Grant } from '@/data/grants';
+import { Grant } from '@/data/grants';
+import { useGrants } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 import { IndianRupee, Calendar, User, Users, CheckCircle, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format, parseISO } from 'date-fns';
@@ -79,6 +81,8 @@ function GrantCard({ grant }: GrantCardProps) {
 }
 
 export default function FundingPage() {
+  const { data: grants = [], isLoading } = useGrants();
+
   const ongoingGrants = grants.filter(g => g.status === 'ongoing');
   const completedGrants = grants.filter(g => g.status === 'completed');
 
@@ -119,7 +123,14 @@ export default function FundingPage() {
           title="Ongoing Grants"
           subtitle="Current research projects and their funding sources"
         />
-        <div className="grid md:grid-cols-2 gap-6">
+        {isLoading ? (
+          <div className="grid md:grid-cols-2 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="h-64 rounded-xl" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6">
           {ongoingGrants.map((grant, idx) => (
             <div
               key={grant.id}
@@ -129,7 +140,8 @@ export default function FundingPage() {
               <GrantCard grant={grant} />
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </Section>
 
       {/* Completed Grants */}

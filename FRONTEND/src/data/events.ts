@@ -68,7 +68,7 @@ export const events: LabEvent[] = [
     description: "Beginner-friendly introduction to graph neural networks and their applications.",
     fullDescription: "This webinar provides a gentle introduction to graph neural networks for those new to the field. We'll cover the basics of graph representation learning, popular GNN architectures, and real-world applications.",
     speaker: "James Wilson",
-    speakerAffiliation: "Computational Intelligence Lab",
+    speakerAffiliation: "Artificial Intelligence Lab",
     status: "upcoming",
     registrationUrl: "#"
   },
@@ -104,7 +104,7 @@ export const events: LabEvent[] = [
     venue: "Room 201, CS Building",
     description: "Overview of recent advances in reinforcement learning theory and practice.",
     speaker: "Sarah Mitchell",
-    speakerAffiliation: "Computational Intelligence Lab",
+    speakerAffiliation: "Artificial Intelligence Lab",
     status: "past"
   },
   {

@@ -14,6 +14,7 @@ const navLinks = [
   { href: '/gallery', label: 'Gallery' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
+  { href: '/admin/login', label: 'Admin' },
 ];
 
 export function Navbar() {
@@ -51,10 +52,10 @@ export function Navbar() {
             </div>
             <div className="hidden sm:block">
               <span className="font-heading text-lg font-bold text-foreground">
-                CI Lab
+                AI Lab
               </span>
               <span className="block text-xs text-muted-foreground -mt-0.5">
-                Computational Intelligence
+                Artificial Intelligence
               </span>
             </div>
           </Link>

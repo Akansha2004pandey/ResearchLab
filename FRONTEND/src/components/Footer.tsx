@@ -30,7 +30,7 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-heading text-xl font-bold">
-                  Computational Intelligence Lab
+                  Artificial Intelligence Lab
                 </span>
                 <span className="block text-sm opacity-70">
                   Netaji Subhas University of Technology
@@ -96,7 +96,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-background/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-60">
-            <p>© {new Date().getFullYear()} Computational Intelligence Lab. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Artificial Intelligence Lab. All rights reserved.</p>
             <p>Part of the Department of Computer Science</p>
           </div>
         </div>

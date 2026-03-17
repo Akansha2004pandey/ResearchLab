@@ -2,11 +2,14 @@ import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
 import { PersonCard } from '@/components/PersonCard';
-import { people, categoryLabels, Person } from '@/data/people';
+import { categoryLabels, Person } from '@/data/people';
+import { usePeople } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const categoryOrder: Person['category'][] = ['faculty', 'phd', 'masters', 'undergrad', 'staff', 'alumni'];
 
 export default function PeoplePage() {
+  const { data: people = [], isLoading } = usePeople();
   const pi = people.find(p => p.id === 'pi-1');
   const groupedPeople = categoryOrder.reduce<Record<Person['category'], Person[]>>((acc, category) => {
     acc[category] = people.filter(p => p.category === category && p.id !== 'pi-1');
@@ -20,8 +23,18 @@ export default function PeoplePage() {
         subtitle="Meet the researchers, students, and staff who make our work possible."
       />
 
+      {isLoading && (
+        <Section>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} className="h-64 rounded-xl" />
+            ))}
+          </div>
+        </Section>
+      )}
+
       {/* Principal Investigator */}
-      {pi && (
+      {!isLoading && pi && (
         <Section>
           <h2 className="text-2xl font-heading font-bold text-foreground mb-6">
             Principal Investigator

@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { submitContact } from '@/lib/api';
 import { MapPin, Mail, Clock, Phone, Send } from 'lucide-react';
 import { z } from 'zod';
 
@@ -46,16 +47,22 @@ export default function ContactPage() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    toast({
-      title: 'Message Sent!',
-      description: 'Thank you for reaching out. We\'ll get back to you soon.',
-    });
-
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
+    try {
+      await submitContact(formData);
+      toast({
+        title: 'Message Sent!',
+        description: 'Thank you for reaching out. We\'ll get back to you soon.',
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch {
+      toast({
+        title: 'Submission failed',
+        description: 'Could not send your message right now. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

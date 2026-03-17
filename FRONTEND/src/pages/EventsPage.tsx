@@ -5,7 +5,9 @@ import { Section, SectionHeader } from '@/components/Section';
 import { EventCard } from '@/components/EventCard';
 import { EventTimeline } from '@/components/EventTimeline';
 import { EventModal } from '@/components/EventModal';
-import { events, LabEvent } from '@/data/events';
+import { LabEvent } from '@/data/events';
+import { useEvents } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 type ViewType = 'upcoming' | 'ongoing' | 'past';
@@ -19,6 +21,8 @@ export default function EventsPage() {
   const [activeView, setActiveView] = useState<ViewType>('upcoming');
   const [selectedEvent, setSelectedEvent] = useState<LabEvent | null>(null);
   const [showTimeline, setShowTimeline] = useState(true);
+
+  const { data: events = [], isLoading } = useEvents();
 
   const filteredEvents = events.filter(e => {
     if (activeView === 'upcoming') return e.status === 'upcoming' || e.status === 'ongoing';
@@ -81,7 +85,13 @@ export default function EventsPage() {
         </div>
 
         {/* Events Display */}
-        {filteredEvents.length > 0 ? (
+        {isLoading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <Skeleton key={i} className="h-52 rounded-xl" />
+            ))}
+          </div>
+        ) : filteredEvents.length > 0 ? (
           activeView === 'past' && showTimeline ? (
             <EventTimeline events={filteredEvents} />
           ) : (

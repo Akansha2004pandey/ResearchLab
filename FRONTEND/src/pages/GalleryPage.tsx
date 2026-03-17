@@ -2,7 +2,9 @@ import { useState, useMemo } from 'react';
 import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
-import { galleryImages, galleryCategoryLabels, GalleryCategory, GalleryImage } from '@/data/gallery';
+import { galleryCategoryLabels, GalleryCategory, GalleryImage } from '@/data/gallery';
+import { useGallery } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,11 +21,12 @@ const filters: { value: FilterType; label: string }[] = [
 export default function GalleryPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const { data: galleryImages = [], isLoading } = useGallery();
 
   const filteredImages = useMemo(() => {
     if (activeFilter === 'all') return galleryImages;
     return galleryImages.filter(img => img.category === activeFilter);
-  }, [activeFilter]);
+  }, [activeFilter, galleryImages]);
 
   const currentIndex = selectedImage
     ? filteredImages.findIndex(img => img.id === selectedImage.id)
@@ -68,8 +71,15 @@ export default function GalleryPage() {
         </div>
 
         {/* Masonry Grid */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
-          {filteredImages.map((image, idx) => (
+        {isLoading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <Skeleton key={i} className="h-64 rounded-xl" />
+            ))}
+          </div>
+        ) : (
+          <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+            {filteredImages.map((image, idx) => (
             <div
               key={image.id}
               className="break-inside-avoid group cursor-pointer animate-fade-in-up"
@@ -89,8 +99,9 @@ export default function GalleryPage() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </Section>
 
       {/* Lightbox */}

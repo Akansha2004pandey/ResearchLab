@@ -2,7 +2,9 @@ import { useState, useMemo } from 'react';
 import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
-import { news, newsCategoryLabels, newsCategoryColors, NewsCategory } from '@/data/news';
+import { newsCategoryLabels, newsCategoryColors, NewsCategory } from '@/data/news';
+import { useNews } from '@/hooks/useLabData';
+import { Skeleton } from '@/components/ui/skeleton';
 import { format, parseISO } from 'date-fns';
 import { cn } from '@/lib/utils';
 
@@ -20,10 +22,13 @@ const filters: { value: FilterType; label: string }[] = [
 export default function NewsPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
 
+  const { data: newsItems = [], isLoading } = useNews();
+
   const filteredNews = useMemo(() => {
+    const news = newsItems;
     if (activeFilter === 'all') return news;
     return news.filter(item => item.category === activeFilter);
-  }, [activeFilter]);
+  }, [activeFilter, newsItems]);
 
   return (
     <Layout>
@@ -52,7 +57,13 @@ export default function NewsPage() {
         </div>
 
         {/* News List */}
-        {filteredNews.length > 0 ? (
+        {isLoading ? (
+          <div className="space-y-6">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="h-32 rounded-xl" />
+            ))}
+          </div>
+        ) : filteredNews.length > 0 ? (
           <div className="space-y-6">
             {filteredNews.map((item, idx) => {
               const colors = newsCategoryColors[item.category];
