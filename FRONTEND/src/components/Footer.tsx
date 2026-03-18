@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { GraduationCap, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { BrainCircuit, Mail, MapPin, ExternalLink } from 'lucide-react';
 
 const quickLinks = [
   { href: '/people', label: 'People' },
@@ -19,27 +19,27 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="relative overflow-hidden bg-foreground text-background">
+      <div className="pointer-events-none absolute -top-24 right-10 h-56 w-56 rounded-full bg-primary/20 blur-3xl" />
       <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Lab Info */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center">
-                <GraduationCap className="w-7 h-7 text-primary-foreground" />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <BrainCircuit className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <span className="font-heading text-xl font-bold">
+                <span className="font-heading text-xl font-semibold tracking-tight">
                   Artificial Intelligence Lab
                 </span>
-                <span className="block text-sm opacity-70">
+                <span className="block text-xs uppercase tracking-[0.18em] opacity-70">
                   Netaji Subhas University of Technology
                 </span>
               </div>
             </Link>
-            <p className="text-sm opacity-80 mb-6 max-w-md">
-              Advancing the frontiers of artificial intelligence and machine learning
-              through fundamental research and impactful applications.
+            <p className="mb-6 max-w-md text-sm opacity-80">
+              We build practical AI systems grounded in rigorous research, open science,
+              and long-term collaboration across academia, government, and industry.
             </p>
             <div className="flex flex-col gap-2 text-sm opacity-80">
               <div className="flex items-center gap-2">
@@ -55,15 +55,14 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-heading text-lg font-semibold mb-4">Navigate</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm opacity-80 hover:opacity-100 transition-opacity"
+                    className="text-sm opacity-80 transition-opacity hover:opacity-100"
                   >
                     {link.label}
                   </Link>
@@ -72,9 +71,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Connect */}
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">Connect</h3>
+            <h3 className="font-heading text-lg font-semibold mb-4">Research Profiles</h3>
             <ul className="space-y-2">
               {socialLinks.map((link) => (
                 <li key={link.href}>
@@ -82,7 +80,7 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm opacity-80 hover:opacity-100 transition-opacity inline-flex items-center gap-1"
+                    className="inline-flex items-center gap-1 text-sm opacity-80 transition-opacity hover:opacity-100"
                   >
                     {link.label}
                     <ExternalLink className="w-3 h-3" />
@@ -93,9 +91,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-background/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-60">
+        <div className="mt-12 border-t border-background/15 pt-8">
+          <div className="flex flex-col items-center justify-between gap-4 text-sm opacity-65 md:flex-row">
             <p>© {new Date().getFullYear()} Artificial Intelligence Lab. All rights reserved.</p>
             <p>Part of the Department of Computer Science</p>
           </div>

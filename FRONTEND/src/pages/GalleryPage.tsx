@@ -59,10 +59,10 @@ export default function GalleryPage() {
               key={filter.value}
               onClick={() => setActiveFilter(filter.value)}
               className={cn(
-                'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                 activeFilter === filter.value
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-muted-foreground hover:bg-accent'
+                  : 'bg-card/80 text-muted-foreground hover:bg-accent'
               )}
             >
               {filter.label}
@@ -74,7 +74,7 @@ export default function GalleryPage() {
         {isLoading ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-64 rounded-xl" />
+              <Skeleton key={i} className="h-64 rounded-none" />
             ))}
           </div>
         ) : (
@@ -86,7 +86,7 @@ export default function GalleryPage() {
               style={{ animationDelay: `${idx * 0.05}s` }}
               onClick={() => setSelectedImage(image)}
             >
-              <div className="relative rounded-xl overflow-hidden">
+              <div className="relative brutal-border overflow-hidden exp-card">
                 <img
                   src={image.src}
                   alt={image.alt}
@@ -138,7 +138,7 @@ export default function GalleryPage() {
             <img
               src={selectedImage.src}
               alt={selectedImage.alt}
-              className="w-full h-auto max-h-[75vh] object-contain rounded-lg"
+              className="w-full h-auto max-h-[75vh] object-contain brutal-border"
             />
             <div className="mt-4 text-center">
               <p className="text-background/90">{selectedImage.caption}</p>

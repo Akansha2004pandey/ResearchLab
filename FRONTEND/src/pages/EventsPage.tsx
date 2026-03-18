@@ -45,10 +45,10 @@ export default function EventsPage() {
                 key={tab.value}
                 onClick={() => setActiveView(tab.value)}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                  'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                   activeView === tab.value
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-accent'
+                    : 'bg-card/80 text-muted-foreground hover:bg-accent'
                 )}
               >
                 {tab.label}
@@ -61,10 +61,10 @@ export default function EventsPage() {
               <button
                 onClick={() => setShowTimeline(true)}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                  'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                   showTimeline
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-accent'
+                    : 'bg-card/80 text-muted-foreground hover:bg-accent'
                 )}
               >
                 Timeline
@@ -72,10 +72,10 @@ export default function EventsPage() {
               <button
                 onClick={() => setShowTimeline(false)}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                  'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                   !showTimeline
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-accent'
+                    : 'bg-card/80 text-muted-foreground hover:bg-accent'
                 )}
               >
                 Grid
@@ -88,7 +88,7 @@ export default function EventsPage() {
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: 6 }).map((_, i) => (
-              <Skeleton key={i} className="h-52 rounded-xl" />
+              <Skeleton key={i} className="h-52 rounded-none" />
             ))}
           </div>
         ) : filteredEvents.length > 0 ? (

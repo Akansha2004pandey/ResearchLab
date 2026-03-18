@@ -26,6 +26,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const RESOURCE_CONFIG: Array<{ key: AdminResource; label: string; description: string }> = [
   { key: 'people', label: 'People', description: 'Faculty, students, staff profiles' },
@@ -429,22 +430,23 @@ export default function AdminDashboardPage() {
   };
 
   return (
-    <main className="min-h-screen bg-muted/30">
-      <header className="border-b border-border bg-background sticky top-0 z-40">
+    <main className="hero-gradient min-h-screen">
+      <header className="border-b border-border/80 bg-background/90 backdrop-blur-md sticky top-0 z-40">
         <div className="container mx-auto px-4 lg:px-8 h-16 flex items-center justify-between">
           <div>
             <h1 className="font-heading text-xl font-bold">AI Lab Admin</h1>
             <p className="text-xs text-muted-foreground">Manage site content without code edits</p>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => navigate('/')}>View Site</Button>
-            <Button variant="destructive" onClick={logout}>Logout</Button>
+          <div className="flex gap-2 items-center">
+            <ThemeToggle />
+            <Button variant="outline" className="rounded-none" onClick={() => navigate('/')}>View Site</Button>
+            <Button variant="destructive" className="rounded-none" onClick={logout}>Logout</Button>
           </div>
         </div>
       </header>
 
       <div className="container mx-auto px-4 lg:px-8 py-8 grid lg:grid-cols-[280px_1fr] gap-6">
-        <Card>
+        <Card className="exp-card rounded-none">
           <CardHeader>
             <CardTitle className="text-base">Admin</CardTitle>
           </CardHeader>
@@ -479,20 +481,20 @@ export default function AdminDashboardPage() {
                 {RESOURCE_CONFIG.find((r) => r.key === activeResource)?.description}
               </p>
             </div>
-            {activeResource !== 'contact_messages' && <Button onClick={startCreate}>Add Block</Button>}
+            {activeResource !== 'contact_messages' && <Button className="rounded-none" onClick={startCreate}>Add Block</Button>}
           </div>
 
           {resourceQuery.isLoading && <p className="text-muted-foreground">Loading data...</p>}
 
           {resourceQuery.data && resourceQuery.data.length === 0 && (
-            <Card>
+            <Card className="exp-card rounded-none">
               <CardContent className="py-10 text-center text-muted-foreground">No items yet.</CardContent>
             </Card>
           )}
 
           <div className="grid md:grid-cols-2 gap-4">
             {(resourceQuery.data ?? []).map((item) => (
-              <Card key={String(item.id ?? item.created_at)}>
+              <Card key={String(item.id ?? item.created_at)} className="exp-card rounded-none">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base">{summarizeItem(item)}</CardTitle>
                   {previewText(activeResource, item) && (
@@ -512,13 +514,14 @@ export default function AdminDashboardPage() {
                   </div>
                   <div className="flex gap-2">
                     {activeResource !== 'contact_messages' && (
-                      <Button variant="outline" size="sm" onClick={() => startEdit(item)}>
+                      <Button variant="outline" size="sm" className="rounded-none" onClick={() => startEdit(item)}>
                         Edit Block
                       </Button>
                     )}
                     <Button
                       variant="destructive"
                       size="sm"
+                      className="rounded-none"
                       onClick={() => {
                         if (!item.id) return;
                         const ok = window.confirm('Delete this content block permanently?');
@@ -536,7 +539,7 @@ export default function AdminDashboardPage() {
       </div>
 
       <Dialog open={isEditorOpen} onOpenChange={setIsEditorOpen}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto brutal-border">
           <DialogHeader>
             <DialogTitle>{editingId ? 'Edit Content Block' : 'Create Content Block'}</DialogTitle>
             <DialogDescription>
@@ -561,8 +564,9 @@ export default function AdminDashboardPage() {
                         No image selected
                       </div>
                     )}
-                    <Input
+                      <Input
                       id={`${field}-upload`}
+                        className="rounded-none"
                       type="file"
                       accept="image/*"
                       onChange={(e) => {
@@ -580,12 +584,14 @@ export default function AdminDashboardPage() {
                   <Textarea
                     id={field}
                     rows={4}
+                    className="rounded-none"
                     value={form[field] ?? ''}
                     onChange={(e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))}
                   />
                 ) : (
                   <Input
                     id={field}
+                    className="rounded-none"
                     value={form[field] ?? ''}
                     onChange={(e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))}
                   />
@@ -595,10 +601,10 @@ export default function AdminDashboardPage() {
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditorOpen(false)}>
+            <Button variant="outline" className="rounded-none" onClick={() => setIsEditorOpen(false)}>
               Cancel
             </Button>
-            <Button onClick={() => saveMutation.mutate()} disabled={saveMutation.isPending}>
+            <Button className="rounded-none" onClick={() => saveMutation.mutate()} disabled={saveMutation.isPending}>
               {saveMutation.isPending ? 'Saving...' : 'Save'}
             </Button>
           </DialogFooter>

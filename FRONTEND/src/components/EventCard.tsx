@@ -14,7 +14,7 @@ export function EventCard({ event, onViewDetails }: EventCardProps) {
   const formattedDate = format(parseISO(event.date), 'MMM d, yyyy');
 
   return (
-    <div className="group p-5 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300">
+    <div className="group exp-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-3">
         <span className={cn('px-2.5 py-1 text-xs font-medium rounded-full', colors.bg, colors.text)}>
@@ -58,11 +58,11 @@ export function EventCard({ event, onViewDetails }: EventCardProps) {
 
       {/* Actions */}
       <div className="flex gap-2">
-        <Button variant="outline" size="sm" onClick={onViewDetails}>
+        <Button variant="outline" size="sm" className="rounded-none" onClick={onViewDetails}>
           View Details
         </Button>
         {event.registrationUrl && event.status === 'upcoming' && (
-          <Button size="sm" asChild>
+          <Button size="sm" className="rounded-none" asChild>
             <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
               Register
               <ExternalLink className="w-3.5 h-3.5 ml-1.5" />

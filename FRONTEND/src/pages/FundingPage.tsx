@@ -17,13 +17,13 @@ function GrantCard({ grant }: GrantCardProps) {
   const endDate = format(parseISO(grant.endDate + '-01'), 'MMM yyyy');
 
   return (
-    <div className="group p-6 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300">
+    <div className="group exp-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span
               className={cn(
-                'inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full',
+                'inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-none',
                 grant.status === 'ongoing'
                   ? 'bg-emerald-100 text-emerald-700'
                   : 'bg-muted text-muted-foreground'
@@ -99,7 +99,7 @@ export default function FundingPage() {
       />
 
       {/* Stats */}
-      <Section className="border-b border-border">
+      <Section className="border-b border-border/70">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { value: ongoingGrants.length.toString(), label: 'Active Grants' },
@@ -107,7 +107,7 @@ export default function FundingPage() {
             { value: completedGrants.length.toString(), label: 'Completed Grants' },
             { value: '7', label: 'Funding Partners' },
           ].map(stat => (
-            <div key={stat.label} className="text-center">
+            <div key={stat.label} className="text-center exp-card p-4">
               <div className="text-3xl md:text-4xl font-heading font-bold text-primary mb-1">
                 {stat.value}
               </div>
@@ -126,7 +126,7 @@ export default function FundingPage() {
         {isLoading ? (
           <div className="grid md:grid-cols-2 gap-6">
             {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="h-64 rounded-xl" />
+              <Skeleton key={i} className="h-64 rounded-none" />
             ))}
           </div>
         ) : (

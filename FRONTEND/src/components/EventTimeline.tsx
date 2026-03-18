@@ -68,7 +68,7 @@ export function EventTimeline({ events }: EventTimelineProps) {
                       )}
                       onClick={() => setSelectedEvent(event)}
                     >
-                      <div className="group p-4 rounded-xl border border-border bg-card hover:shadow-card hover:-translate-y-1 transition-all duration-300">
+                      <div className="group exp-card p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
                         <div className="flex items-center justify-between gap-2 mb-2">
                           <span className={cn('px-2 py-0.5 text-xs font-medium rounded-full', colors.bg, colors.text)}>
                             {eventTypeLabels[event.type]}

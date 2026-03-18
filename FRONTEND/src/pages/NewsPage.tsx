@@ -45,10 +45,10 @@ export default function NewsPage() {
               key={filter.value}
               onClick={() => setActiveFilter(filter.value)}
               className={cn(
-                'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                 activeFilter === filter.value
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-muted-foreground hover:bg-accent'
+                  : 'bg-card/80 text-muted-foreground hover:bg-accent'
               )}
             >
               {filter.label}
@@ -60,7 +60,7 @@ export default function NewsPage() {
         {isLoading ? (
           <div className="space-y-6">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className="h-32 rounded-xl" />
+              <Skeleton key={i} className="h-32 rounded-none" />
             ))}
           </div>
         ) : filteredNews.length > 0 ? (
@@ -70,7 +70,7 @@ export default function NewsPage() {
               return (
                 <div
                   key={item.id}
-                  className="group flex flex-col md:flex-row gap-6 p-6 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300 animate-fade-in-up"
+                  className="group exp-card flex flex-col md:flex-row gap-6 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover animate-fade-in-up"
                   style={{ animationDelay: `${idx * 0.05}s` }}
                 >
                   {item.image && (

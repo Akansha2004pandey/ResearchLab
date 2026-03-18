@@ -1,292 +1,335 @@
 import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import type { ElementType } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { format, parseISO } from 'date-fns';
 import { Layout } from '@/components/Layout';
-import { Section, SectionHeader } from '@/components/Section';
 import { Button } from '@/components/ui/button';
-import { useResearchAreas, usePublications, useEvents, useNews, usePeople, useGrants } from '@/hooks/useLabData';
+import { useResearchAreas, usePublications, usePeople, useGrants, useEvents, useNews } from '@/hooks/useLabData';
 import {
   ArrowRight,
-  Users,
-  BookOpen,
-  Calendar,
   Sparkles,
+  Microscope,
+  CalendarDays,
+  BookOpen,
+  Users,
+  Newspaper,
   Brain,
-  MessageSquare,
-  Eye,
-  Bot,
-  Shield,
-  Heart
+  ExternalLink,
 } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
 
-const iconMap: Record<string, React.ElementType> = {
-  Brain, MessageSquare, Eye, Bot, Shield, Heart
+type BlockType = 'manifesto' | 'research' | 'project' | 'publication' | 'people' | 'news' | 'event' | 'cta';
+
+type CanvasBlock = {
+  id: string;
+  type: BlockType;
+  title: string;
+  subtitle: string;
+  href: string;
+  meta?: string;
+  image?: string;
+  className: string;
+  accent?: 'blue' | 'pink' | 'dark';
 };
+
+function parseGrantAmount(amount?: string): number {
+  if (!amount) return 0;
+  const clean = amount.replace(/[^\d.]/g, '');
+  const value = Number.parseFloat(clean);
+  return Number.isFinite(value) ? value : 0;
+}
+
+function accentClass(accent?: CanvasBlock['accent']) {
+  if (accent === 'pink') return 'before:bg-secondary/20';
+  if (accent === 'dark') return 'before:bg-foreground/10';
+  return 'before:bg-primary/20';
+}
+
+const blockPattern = [
+  'col-span-12 md:col-span-7 lg:col-span-8 row-span-2',
+  'col-span-12 md:col-span-5 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-6 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-6 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-4 lg:col-span-3 row-span-1',
+  'col-span-12 md:col-span-8 lg:col-span-5 row-span-1',
+  'col-span-12 md:col-span-4 lg:col-span-3 row-span-1',
+  'col-span-12 md:col-span-8 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-6 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-6 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-6 lg:col-span-4 row-span-1',
+  'col-span-12 md:col-span-5 lg:col-span-4 row-span-2',
+  'col-span-12 md:col-span-7 lg:col-span-8 row-span-1',
+];
 
 export default function HomePage() {
   const { data: researchAreas = [] } = useResearchAreas();
   const { data: publications = [] } = usePublications();
-  const { data: events = [] } = useEvents();
-  const { data: news = [] } = useNews();
   const { data: people = [] } = usePeople();
   const { data: grants = [] } = useGrants();
+  const { data: events = [] } = useEvents();
+  const { data: news = [] } = useNews();
+  const [activeBlockId, setActiveBlockId] = useState<string | null>(null);
 
-  const featuredPublications = publications.filter(p => p.featured).slice(0, 3);
-  const upcomingEvents = events.filter(e => e.status === 'upcoming' || e.status === 'ongoing').slice(0, 3);
-  const latestNews = news.slice(0, 4);
-  const ongoingFunding = grants
-    .filter(g => g.status === 'ongoing')
-    .reduce((sum, g) => sum + (g.amount ? parseFloat(g.amount.replace(/[₹,]/g, '')) : 0), 0);
+  const totalFunding = grants.reduce((sum, grant) => sum + parseGrantAmount(grant.amount), 0);
+  const activeGrants = grants.filter((grant) => grant.status === 'ongoing').length;
+  const lead = people.find((member) => member.category === 'faculty') ?? people[0];
+
+  const featuredProjects = useMemo(
+    () =>
+      researchAreas.slice(0, 3).map((area, idx) => ({
+        id: `project-${area.id}`,
+        title: area.title,
+        subtitle: area.shortDescription,
+        meta: ['ML', 'CV', 'NLP', 'Robotics'][idx % 4],
+      })),
+    [researchAreas]
+  );
+
+  const blocks: CanvasBlock[] = useMemo(() => {
+    const set: CanvasBlock[] = [
+      {
+        id: 'manifesto',
+        type: 'manifesto',
+        title: 'INTELLIGENCE MUST SURVIVE REALITY.',
+        subtitle:
+          'We build AI that performs under uncertainty, adapts to low-resource environments, and remains accountable when deployed in public systems.',
+        href: '/research',
+        meta: 'NSUT AI LAB MANIFESTO',
+        className: blockPattern[0],
+        accent: 'dark',
+      },
+      {
+        id: 'metrics',
+        type: 'project',
+        title: `${publications.length} papers · ${people.length} researchers`,
+        subtitle: `${activeGrants} active grants | ${totalFunding > 0 ? `₹${(totalFunding / 10000000).toFixed(1)}Cr` : 'Funding in progress'}`,
+        href: '/funding',
+        meta: 'LIVE FOOTPRINT',
+        className: blockPattern[1],
+        accent: 'blue',
+      },
+    ];
+
+    researchAreas.slice(0, 3).forEach((item, idx) => {
+      set.push({
+        id: `research-${item.id}`,
+        type: 'research',
+        title: item.title,
+        subtitle: item.shortDescription,
+        href: '/research',
+        meta: 'RESEARCH STREAM',
+        className: blockPattern[2 + idx],
+        accent: idx % 2 === 0 ? 'blue' : 'pink',
+      });
+    });
+
+    featuredProjects.forEach((project, idx) => {
+      set.push({
+        id: project.id,
+        type: 'project',
+        title: project.title,
+        subtitle: project.subtitle,
+        href: '/research',
+        meta: `PROJECT · ${project.meta}`,
+        className: blockPattern[4 + idx],
+        accent: idx % 2 === 0 ? 'pink' : 'blue',
+      });
+    });
+
+    publications.slice(0, 3).forEach((item, idx) => {
+      set.push({
+        id: `publication-${item.id}`,
+        type: 'publication',
+        title: item.title,
+        subtitle: `${item.venue} · ${item.year}`,
+        href: '/publications',
+        meta: 'PUBLICATION',
+        className: blockPattern[7 + idx],
+        accent: 'dark',
+      });
+    });
+
+    events.slice(0, 2).forEach((item, idx) => {
+      set.push({
+        id: `event-${item.id}`,
+        type: 'event',
+        title: item.title,
+        subtitle: `${format(parseISO(item.date), 'MMM d, yyyy')} · ${item.venue}`,
+        href: '/events',
+        meta: 'EVENT',
+        className: blockPattern[(8 + idx) % blockPattern.length],
+        accent: 'blue',
+      });
+    });
+
+    news.slice(0, 2).forEach((item, idx) => {
+      set.push({
+        id: `news-${item.id}`,
+        type: 'news',
+        title: item.title,
+        subtitle: `${format(parseISO(item.date), 'MMM d, yyyy')} · ${item.category}`,
+        href: '/news',
+        meta: 'NEWS SIGNAL',
+        className: blockPattern[(9 + idx) % blockPattern.length],
+        accent: 'pink',
+      });
+    });
+
+    while (set.length < 12) {
+      const idx = set.length;
+      set.push({
+        id: `pulse-${idx}`,
+        type: 'project',
+        title: `Lab Pulse ${idx - 1}`,
+        subtitle: 'Continuous experiments across language, vision, and responsible AI deployment tracks.',
+        href: '/research',
+        meta: 'SYSTEM UPDATE',
+        className: blockPattern[idx % blockPattern.length],
+        accent: idx % 2 === 0 ? 'blue' : 'pink',
+      });
+    }
+
+    if (lead) {
+      set.push({
+        id: `lead-${lead.id}`,
+        type: 'people',
+        title: lead.name,
+        subtitle: lead.role,
+        href: '/people',
+        meta: 'FACULTY LEAD',
+        image: lead.image,
+        className: blockPattern[11],
+        accent: 'dark',
+      });
+    }
+
+    set.push({
+      id: 'cta',
+      type: 'cta',
+      title: 'JOIN THE SYSTEM',
+      subtitle: 'Collaborate, apply, or deploy research with us.',
+      href: '/contact',
+      meta: 'OPEN CALL',
+      className: blockPattern[12],
+      accent: 'pink',
+    });
+
+    return set;
+  }, [researchAreas, publications, featuredProjects, events, news, lead, people, activeGrants, totalFunding]);
+
+  const iconByType: Record<BlockType, ElementType> = {
+    manifesto: Sparkles,
+    research: Microscope,
+    project: Brain,
+    publication: BookOpen,
+    people: Users,
+    news: Newspaper,
+    event: CalendarDays,
+    cta: ExternalLink,
+  };
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center hero-gradient overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-float" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
-        </div>
+      <div className="relative min-h-screen overflow-hidden px-4 pb-20 pt-24 md:px-6 lg:px-10 lg:pt-28">
+        <div className="pointer-events-none absolute -left-20 top-20 h-[360px] w-[360px] rounded-full bg-primary/20 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 top-[35%] h-[320px] w-[320px] rounded-full bg-secondary/20 blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 mesh-overlay opacity-30" />
 
-        <div className="container mx-auto px-4 lg:px-8 py-20 relative">
-          <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent border border-border mb-6 animate-fade-in-up">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-sm font-medium text-foreground">Netaji Subhas University of Technology</span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-foreground mb-6 animate-fade-in-up stagger-1">
-              Computational<br />
-              <span>Intelligence Lab</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-fade-in-up stagger-2">
-              Advancing the frontiers of artificial intelligence through fundamental research
-              and impactful applications. We build intelligent systems that understand, reason, and learn.
+        <div className="mx-auto max-w-[1600px]">
+          <div className="relative mb-6">
+            <p className="font-heading text-[clamp(2.2rem,7vw,6.8rem)] font-semibold uppercase leading-[0.88] tracking-[-0.03em] text-foreground">
+              Artificial Intelligence Lab
             </p>
-
-            <div className="flex flex-wrap gap-4 animate-fade-in-up stagger-3">
-              <Button size="lg" asChild>
+            <p className="mt-2 max-w-xl text-sm uppercase tracking-[0.24em] text-muted-foreground">
+              Netaji Subhas University of Technology · Delhi
+            </p>
+            <div className="absolute right-0 top-1 hidden xl:block">
+              <Button variant="outline" className="rounded-none border-foreground/20 bg-background/70" asChild>
                 <Link to="/research">
                   Explore Research
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/contact">Join Our Lab</Link>
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 animate-fade-in-up stagger-4">
-              {[
-                { value: `${publications.length}+`, label: 'Publications' },
-                { value: `${people.length}+`, label: 'Team Members' },
-                { value: ongoingFunding ? `₹${(ongoingFunding / 1000000).toFixed(1)}M+` : 'Live', label: 'Research Funding' },
-                { value: `${researchAreas.length}`, label: 'Research Areas' },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <div className="text-3xl md:text-4xl font-heading font-bold text-primary">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
-              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Research Areas */}
-      <Section>
-        <SectionHeader
-          title="Research Areas"
-          subtitle="Exploring the frontiers of AI across multiple domains"
-        />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {researchAreas.map((area, idx) => {
-            const IconComponent = iconMap[area.icon] || Brain;
-            return (
-              <Link
-                key={area.id}
-                to="/research"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-card hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
-                  <IconComponent className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {area.title}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {area.shortDescription}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
-        <div className="text-center mt-8">
-          <Button variant="outline" asChild>
-            <Link to="/research">
-              View All Research
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
+          <div className="relative grid grid-flow-dense auto-rows-[125px] grid-cols-12 gap-3 md:auto-rows-[138px] lg:auto-rows-[148px]">
+            {blocks.map((block, index) => {
+              const Icon = iconByType[block.type];
+              const isActive = activeBlockId === block.id;
 
-      {/* Featured Publications */}
-      <Section className="bg-muted/30">
-        <SectionHeader
-          title="Featured Publications"
-          subtitle="Our latest contributions to the scientific community"
-        />
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredPublications.map((pub, idx) => (
-            <div
-              key={pub.id}
-              className="group p-6 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${idx * 0.1}s` }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <BookOpen className="w-4 h-4 text-primary" />
-                <span className="text-xs font-medium text-primary">{pub.venue}</span>
-                <span className="text-xs text-muted-foreground">· {pub.year}</span>
-              </div>
-              <h3 className="font-heading font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                {pub.title}
-              </h3>
-              <p className="text-sm text-muted-foreground line-clamp-1">
-                {pub.authors.join(', ')}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Button variant="outline" asChild>
-            <Link to="/publications">
-              View All Publications
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
+              return (
+                <motion.article
+                  key={block.id}
+                  layout
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: index * 0.03 }}
+                  onMouseEnter={() => setActiveBlockId(block.id)}
+                  onMouseLeave={() => setActiveBlockId(null)}
+                  className={`${block.className} relative overflow-hidden`}
+                >
+                  <Link
+                    to={block.href}
+                    className={`noise-surface brutal-border group relative flex h-full flex-col justify-between border border-border/80 bg-card/85 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${accentClass(block.accent)}`}
+                  >
+                    <div className="relative z-[1] flex items-center justify-between">
+                      <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{block.meta}</span>
+                      <Icon className="h-4 w-4 text-primary" />
+                    </div>
 
-      {/* Upcoming Events */}
-      <Section>
-        <SectionHeader
-          title="Upcoming Events"
-          subtitle="Join us for seminars, workshops, and more"
-        />
-        {upcomingEvents.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {upcomingEvents.map((event, idx) => (
-              <Link
-                key={event.id}
-                to="/events"
-                className="group p-6 rounded-xl border border-border bg-card hover:shadow-card hover:-translate-y-1 transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <Calendar className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-foreground">
-                    {format(parseISO(event.date), 'MMM d, yyyy')}
-                  </span>
-                </div>
-                <h3 className="font-heading font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                  {event.title}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {event.description}
-                </p>
-              </Link>
-            ))}
+                    <div className="relative z-[1] mt-2">
+                      <h2
+                        className={`font-heading font-semibold tracking-tight text-foreground ${
+                          block.type === 'manifesto' ? 'text-[clamp(1.3rem,3vw,3.2rem)] leading-[0.9]' : 'text-[clamp(1rem,2vw,1.6rem)] leading-tight'
+                        }`}
+                      >
+                        {block.title}
+                      </h2>
+
+                      <AnimatePresence>
+                        {(isActive || block.type === 'manifesto') && (
+                          <motion.p
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 8 }}
+                            transition={{ duration: 0.22 }}
+                            className="mt-2 line-clamp-4 text-sm text-muted-foreground"
+                          >
+                            {block.subtitle}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </div>
+
+                    {block.image && (
+                      <img
+                        src={block.image}
+                        alt={block.title}
+                        className="absolute bottom-3 right-3 h-20 w-20 rounded-sm object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
+                      />
+                    )}
+
+                    <div className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-primary/10 blur-2xl transition-all duration-300 group-hover:bg-secondary/20" />
+                  </Link>
+                </motion.article>
+              );
+            })}
           </div>
-        ) : (
-          <p className="text-center text-muted-foreground">No upcoming events at the moment.</p>
-        )}
-        <div className="text-center mt-8">
-          <Button variant="outline" asChild>
-            <Link to="/events">
-              View All Events
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
 
-      {/* Latest News */}
-      <Section className="bg-muted/30">
-        <SectionHeader
-          title="Latest News"
-          subtitle="Stay updated with our achievements and announcements"
-        />
-        <div className="grid md:grid-cols-2 gap-6">
-          {latestNews.map((item, idx) => (
-            <div
-              key={item.id}
-              className="group flex gap-4 p-4 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300 animate-fade-in-up"
-              style={{ animationDelay: `${idx * 0.1}s` }}
-            >
-              {item.image && (
-                <div className="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              )}
-              <div className="flex-1 min-w-0">
-                <span className="text-xs text-muted-foreground">
-                  {format(parseISO(item.date), 'MMM d, yyyy')}
-                </span>
-                <h3 className="font-heading font-semibold text-foreground mt-1 line-clamp-2 group-hover:text-primary transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Button variant="outline" asChild>
-            <Link to="/news">
-              View All News
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-        </div>
-      </Section>
-
-      {/* CTA Section */}
-      <Section>
-        <div className="relative rounded-2xl overflow-hidden bg-primary p-8 md:p-12 lg:p-16">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-background rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          </div>
-          <div className="relative max-w-2xl">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-primary-foreground mb-4">
-              Join Our Research Team
-            </h2>
-            <p className="text-primary-foreground/80 mb-6">
-              We're always looking for talented researchers, PhD students, and collaborators
-              who share our passion for advancing AI. Explore opportunities to work with us.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="secondary" size="lg" asChild>
-                <Link to="/contact">
-                  <Users className="w-4 h-4 mr-2" />
-                  Get in Touch
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" className="bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-                <Link to="/people">Meet the Team</Link>
-              </Button>
-            </div>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Button className="rounded-none" asChild>
+              <Link to="/contact">Join Lab</Link>
+            </Button>
+            <Button variant="outline" className="rounded-none border-foreground/20" asChild>
+              <Link to="/people">Meet People</Link>
+            </Button>
+            <Button variant="outline" className="rounded-none border-foreground/20" asChild>
+              <Link to="/publications">Scattered Publications</Link>
+            </Button>
           </div>
         </div>
-      </Section>
+      </div>
     </Layout>
   );
 }

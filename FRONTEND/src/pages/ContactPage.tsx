@@ -91,7 +91,7 @@ export default function ContactPage() {
 
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-none bg-accent flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-none bg-accent flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-none bg-accent flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -132,7 +132,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-none bg-accent flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-primary" />
                   </div>
                   <div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="p-8 rounded-xl border border-border bg-card">
+            <div className="exp-card p-8">
               <h2 className="text-xl font-heading font-bold text-foreground mb-6">
                 Send us a Message
               </h2>
@@ -178,7 +178,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your name"
-                      className={errors.name ? 'border-destructive' : ''}
+                      className={errors.name ? 'border-destructive rounded-none' : 'rounded-none'}
                     />
                     {errors.name && (
                       <p className="text-sm text-destructive">{errors.name}</p>
@@ -194,7 +194,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your.email@example.com"
-                      className={errors.email ? 'border-destructive' : ''}
+                      className={errors.email ? 'border-destructive rounded-none' : 'rounded-none'}
                     />
                     {errors.email && (
                       <p className="text-sm text-destructive">{errors.email}</p>
@@ -210,7 +210,7 @@ export default function ContactPage() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="What is this regarding?"
-                    className={errors.subject ? 'border-destructive' : ''}
+                    className={errors.subject ? 'border-destructive rounded-none' : 'rounded-none'}
                   />
                   {errors.subject && (
                     <p className="text-sm text-destructive">{errors.subject}</p>
@@ -226,14 +226,14 @@ export default function ContactPage() {
                     onChange={handleChange}
                     placeholder="Your message..."
                     rows={6}
-                    className={errors.message ? 'border-destructive' : ''}
+                    className={errors.message ? 'border-destructive rounded-none' : 'rounded-none'}
                   />
                   {errors.message && (
                     <p className="text-sm text-destructive">{errors.message}</p>
                   )}
                 </div>
 
-                <Button type="submit" size="lg" disabled={isSubmitting}>
+                <Button type="submit" size="lg" className="rounded-none" disabled={isSubmitting}>
                   {isSubmitting ? (
                     'Sending...'
                   ) : (

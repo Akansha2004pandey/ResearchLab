@@ -25,9 +25,9 @@ export default function PeoplePage() {
 
       {isLoading && (
         <Section>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-12 gap-6">
             {Array.from({ length: 8 }).map((_, i) => (
-              <Skeleton key={i} className="h-64 rounded-xl" />
+              <Skeleton key={i} className="col-span-12 md:col-span-6 lg:col-span-3 h-64 rounded-none" />
             ))}
           </div>
         </Section>
@@ -49,15 +49,15 @@ export default function PeoplePage() {
         if (!members || members.length === 0) return null;
 
         return (
-          <Section key={category} className="border-t border-border">
-            <h2 className="text-2xl font-heading font-bold text-foreground mb-6">
+          <Section key={category} className="border-t border-border/70">
+            <h2 className="text-2xl font-heading font-semibold uppercase tracking-[0.04em] text-foreground mb-6">
               {categoryLabels[category]}
             </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-12 gap-6">
               {members.map((person, idx) => (
                 <div
                   key={person.id}
-                  className="animate-fade-in-up"
+                  className="animate-fade-in-up col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3"
                   style={{ animationDelay: `${idx * 0.05}s` }}
                 >
                   <PersonCard person={person} />

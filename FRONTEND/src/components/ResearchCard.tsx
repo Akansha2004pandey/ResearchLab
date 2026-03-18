@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import type { ElementType } from 'react';
 import { ResearchArea } from '@/data/research';
 import { ChevronDown, Brain, MessageSquare, Eye, Bot, Shield, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const iconMap: Record<string, React.ElementType> = {
+const iconMap: Record<string, ElementType> = {
   Brain,
   MessageSquare,
   Eye,
@@ -21,7 +22,7 @@ export function ResearchCard({ area }: ResearchCardProps) {
   const IconComponent = iconMap[area.icon] || Brain;
 
   return (
-    <div className="group card-gradient rounded-xl border border-border shadow-card overflow-hidden hover-lift">
+    <div className="group exp-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
       {/* Image */}
       <div className="relative h-48 overflow-hidden">
         <img
@@ -32,7 +33,7 @@ export function ResearchCard({ area }: ResearchCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4">
           <div className="flex items-center gap-2 text-background">
-            <div className="w-10 h-10 rounded-lg bg-primary/90 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-none bg-primary/90 flex items-center justify-center">
               <IconComponent className="w-5 h-5 text-primary-foreground" />
             </div>
             <h3 className="font-heading text-xl font-semibold">{area.title}</h3>

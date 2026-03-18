@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Publication } from '@/data/publications';
 import { FileText, ExternalLink, Code, Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 
 interface PublicationCardProps {
   publication: Publication;
@@ -21,10 +20,10 @@ export function PublicationCard({ publication }: PublicationCardProps) {
   };
 
   return (
-    <div className="group p-5 rounded-xl border border-border bg-card hover:shadow-card transition-all duration-300">
+    <div className="group exp-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
       <div className="flex gap-4">
         {/* Icon */}
-        <div className="hidden sm:flex w-10 h-10 rounded-lg bg-accent items-center justify-center flex-shrink-0">
+        <div className="hidden sm:flex w-10 h-10 rounded-none bg-accent items-center justify-center flex-shrink-0">
           <FileText className="w-5 h-5 text-primary" />
         </div>
 
@@ -52,7 +51,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-2">
             {publication.pdfUrl && (
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.pdfUrl} target="_blank" rel="noopener noreferrer">
                   <FileText className="w-3.5 h-3.5 mr-1.5" />
                   PDF
@@ -60,7 +59,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
               </Button>
             )}
             {publication.doiUrl && (
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.doiUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
                   DOI
@@ -68,7 +67,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
               </Button>
             )}
             {publication.codeUrl && (
-              <Button variant="outline" size="sm" asChild>
+              <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.codeUrl} target="_blank" rel="noopener noreferrer">
                   <Code className="w-3.5 h-3.5 mr-1.5" />
                   Code
@@ -79,6 +78,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
               <Button
                 variant="outline"
                 size="sm"
+                className="rounded-none"
                 onClick={() => setShowBibtex(!showBibtex)}
               >
                 BibTeX
@@ -95,7 +95,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-2 right-2"
+                className="absolute top-2 right-2 rounded-none"
                 onClick={copyBibtex}
               >
                 {copied ? (

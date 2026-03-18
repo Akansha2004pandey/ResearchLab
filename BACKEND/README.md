@@ -1,15 +1,21 @@
-# ResearchLab Backend (Supabase)
+# AI Lab Backend (Supabase + Admin CMS API)
 
-This backend mirrors the current frontend data model and provides a production-style API layer over Supabase.
+Backend API for the AI Lab website. It provides:
 
-## Stack
+- Public read endpoints for website showcase data
+- Contact form submission endpoint
+- Admin authentication and protected CRUD endpoints
+- Admin image upload endpoint for block-based content editing
+
+## Tech Stack
 
 - Node.js + Express + TypeScript
-- Supabase Postgres
-- Supabase JS client (`service_role` key)
-- Zod validation for inputs
+- Supabase (Postgres + Storage)
+- Zod validation
+- JWT-based admin session auth
+- bcrypt password hashing
 
-## 1. Setup
+## Setup
 
 ```bash
 cd BACKEND
@@ -17,78 +23,95 @@ npm install
 cp .env.example .env
 ```
 
-Update `.env`:
+Configure `BACKEND/.env`:
 
-- `SUPABASE_URL`: your Supabase project URL
-- `SUPABASE_SERVICE_ROLE_KEY`: service role key from Supabase project settings
-- `CORS_ORIGIN`: frontend URL, default `http://localhost:8081`
-- `JWT_SECRET`: random 32+ character secret for admin session tokens
-- `ADMIN_SIGNUP_KEY`: optional key required during admin signup
+- `PORT` default: `4001`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `CORS_ORIGIN` default: `http://localhost:8081`
+- `JWT_SECRET` (strong random secret)
+- `ADMIN_SIGNUP_KEY` (optional but recommended)
 
-## 2. Create DB schema + seed
+## Database Initialization
 
-In Supabase SQL editor, run:
+Run these SQL files in Supabase SQL Editor, in order:
 
 1. `supabase/schema.sql`
 2. `supabase/seed.sql`
-3. `supabase/admin_auth.sql` (required for admin login/signup)
+3. `supabase/admin_auth.sql`
 
-## 3. Run API
+The third script creates `admin_users` used by admin login/signup.
+
+## Run Locally
 
 ```bash
 npm run dev
 ```
 
-Server default: `http://localhost:4001`
+Default API base URL: `http://localhost:4001/api`
 
-## API Endpoints
+## Scripts
+
+- `npm run dev` - run in watch mode
+- `npm run build` - compile TypeScript
+- `npm run typecheck` - type checking only
+- `npm run start` - run compiled build
+
+## Public Endpoints
 
 - `GET /api/health`
 - `GET /api/home/summary`
-- `GET /api/people?category=faculty|phd|masters|undergrad|staff|alumni`
+- `GET /api/people`
 - `GET /api/people/principal-investigator`
 - `GET /api/research`
-- `GET /api/publications?type=journal|conference|workshop|preprint|patent&featured=true&year=2024&search=deep`
-- `GET /api/grants?status=ongoing|completed`
-- `GET /api/events?status=upcoming|ongoing|past&type=seminar|workshop|conference|hackathon|webinar|outreach`
-- `GET /api/news?category=paper|grant|award|media|general`
-- `GET /api/gallery?category=conference|workshop|lab|outreach`
+- `GET /api/publications`
+- `GET /api/grants`
+- `GET /api/events`
+- `GET /api/news`
+- `GET /api/gallery`
 - `POST /api/contact`
 
-### Admin Auth + CMS Endpoints
+## Admin Endpoints
+
+Authentication:
 
 - `POST /api/admin/auth/signup`
 - `POST /api/admin/auth/login`
 - `GET /api/admin/auth/me`
+
+Protected CMS:
+
 - `GET /api/admin/:resource`
 - `POST /api/admin/:resource`
 - `PUT /api/admin/:resource/:id`
 - `DELETE /api/admin/:resource/:id`
+- `POST /api/admin/upload-image` (multipart form-data: `file`)
 
-Supported `:resource` values: `people`, `research_areas`, `publications`, `grants`, `events`, `news`, `gallery_images`, `contact_messages`.
+Supported resources:
 
-`POST /api/contact` body:
+- `people`
+- `research_areas`
+- `publications`
+- `grants`
+- `events`
+- `news`
+- `gallery_images`
+- `contact_messages`
 
-```json
-{
-  "name": "Jane Doe",
-  "email": "jane@example.com",
-  "subject": "Collaboration",
-  "message": "I would like to discuss a potential collaboration..."
-}
-```
+## Security Guidelines
 
-## Frontend integration notes
+- Never expose `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
+- Set a strong `JWT_SECRET` in all environments.
+- Use `ADMIN_SIGNUP_KEY` to restrict admin account creation.
+- Rotate admin credentials and secrets periodically.
+- Use HTTPS and secure environment variable management in production.
 
-Replace imports from `src/data/*.ts` with API calls to this backend. Existing frontend filtering logic can stay client-side or move to query params above.
+## Frontend Integration
 
-Minimal Vite env for frontend:
+Set frontend env:
 
 ```env
 VITE_API_BASE_URL=http://localhost:4001/api
 ```
 
-## Security notes
-
-- Backend uses `service_role` key; do not expose this key in frontend.
-- Keep `contact_messages` write-only from client perspective (only backend should fetch admin-side).
+Then run frontend from `../FRONTEND`.

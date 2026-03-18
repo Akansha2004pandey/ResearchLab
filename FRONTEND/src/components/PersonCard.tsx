@@ -11,7 +11,7 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
   return (
     <div
       className={cn(
-        'group card-gradient rounded-xl border border-border shadow-card hover-lift overflow-hidden',
+        'group exp-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover',
         featured && 'lg:flex lg:items-start'
       )}
     >
@@ -32,7 +32,7 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
         <h3 className={cn('font-heading font-semibold text-foreground mb-1', featured ? 'text-2xl' : 'text-lg')}>
           {person.name}
         </h3>
-        <p className="text-primary font-medium text-sm mb-3">{person.role}</p>
+        <p className="text-primary font-medium text-sm mb-3 uppercase tracking-[0.1em]">{person.role}</p>
 
         <p className={cn('text-muted-foreground text-sm mb-4', featured ? 'line-clamp-4' : 'line-clamp-2')}>
           {person.bio}
@@ -42,7 +42,7 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
           {person.researchInterests.slice(0, featured ? 4 : 3).map((interest) => (
             <span
               key={interest}
-              className="px-2 py-0.5 text-xs bg-accent text-accent-foreground rounded-full"
+              className="px-2 py-0.5 text-xs bg-accent text-accent-foreground rounded-none"
             >
               {interest}
             </span>

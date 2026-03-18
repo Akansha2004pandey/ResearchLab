@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
+# AI Lab Frontend
 
-## Project info
+Frontend application for the AI Lab website at NSUT. This project provides the public lab showcase and an admin portal UI for managing content blocks (people, research, publications, grants, events, news, and gallery).
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Tech Stack
 
-## How can I edit this code?
+- React 18 + TypeScript
+- Vite 5
+- Tailwind CSS + shadcn/ui
+- TanStack Query
+- React Router
 
-There are several ways of editing your application.
+## Project Structure
 
-**Use Lovable**
+- `src/pages`: Public pages and admin pages
+- `src/components`: Reusable UI and layout components
+- `src/lib/api.ts`: Public API client
+- `src/lib/adminApi.ts`: Admin API client (auth + CRUD + image upload)
+- `src/hooks/useLabData.ts`: Query hooks for public data
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Environment
 
-Changes made via Lovable will be committed automatically to this repo.
+Create `FRONTEND/.env` with:
 
-**Use your preferred IDE**
+```env
+VITE_API_BASE_URL=http://localhost:4001/api
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Local Development
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+cd FRONTEND
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Default local URL: `http://localhost:8081`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Build and Quality Checks
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+npm run lint
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Routing Overview
 
-## What technologies are used for this project?
+Public routes:
 
-This project is built with:
+- `/`
+- `/people`
+- `/research`
+- `/publications`
+- `/funding`
+- `/events`
+- `/gallery`
+- `/news`
+- `/contact`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Admin routes:
 
-## How can I deploy this project?
+- `/admin/login`
+- `/admin/signup`
+- `/admin`
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Admin UX Highlights
 
-## Can I connect a custom domain to my Lovable project?
+- Block-based editing (no manual JSON editing)
+- Add, edit, and delete content blocks per section
+- Image fields support file upload directly from the form
+- Changes sync to Supabase via protected backend endpoints
 
-Yes, you can!
+## Backend Dependency
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+This frontend requires the backend API to be running at the configured `VITE_API_BASE_URL`. See `../BACKEND/README.md` for backend setup.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Notes
+
+- Keep admin JWT token secret and use HTTPS in production.
+- Use a strong `ADMIN_SIGNUP_KEY` and rotate periodically.

@@ -78,10 +78,10 @@ export default function PublicationsPage() {
                 key={tab.value}
                 onClick={() => setActiveTab(tab.value)}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                  'px-4 py-2 text-sm font-medium rounded-none transition-colors border border-border/70',
                   activeTab === tab.value
                     ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-accent'
+                    : 'bg-card/80 text-muted-foreground hover:bg-accent'
                 )}
               >
                 {tab.label}
@@ -96,7 +96,7 @@ export default function PublicationsPage() {
               placeholder="Search publications..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="pl-10"
+              className="pl-10 rounded-none"
             />
           </div>
         </div>
@@ -105,13 +105,13 @@ export default function PublicationsPage() {
         {isLoading ? (
           <div className="space-y-4">
             {Array.from({ length: 6 }).map((_, i) => (
-              <Skeleton key={i} className="h-28 rounded-xl" />
+              <Skeleton key={i} className="h-28 rounded-none" />
             ))}
           </div>
         ) : years.length > 0 ? (
           <div className="space-y-8">
             {years.map(year => (
-              <div key={year}>
+              <div key={year} className="exp-card p-4 md:p-6">
                 <h3 className="text-xl font-heading font-bold text-foreground mb-4 flex items-center gap-3">
                   <span>{year}</span>
                   <span className="text-sm font-normal text-muted-foreground">
