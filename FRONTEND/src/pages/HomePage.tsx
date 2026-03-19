@@ -1,22 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useMemo, useState } from 'react';
-import type { ElementType } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { format, parseISO } from 'date-fns';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { useResearchAreas, usePublications, usePeople, useGrants, useEvents, useNews } from '@/hooks/useLabData';
-import {
-  ArrowRight,
-  Sparkles,
-  Microscope,
-  CalendarDays,
-  BookOpen,
-  Users,
-  Newspaper,
-  Brain,
-  ExternalLink,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 type BlockType = 'manifesto' | 'research' | 'project' | 'publication' | 'people' | 'news' | 'event' | 'cta';
 
@@ -217,15 +206,15 @@ export default function HomePage() {
     return set;
   }, [researchAreas, publications, featuredProjects, events, news, lead, people, activeGrants, totalFunding]);
 
-  const iconByType: Record<BlockType, ElementType> = {
-    manifesto: Sparkles,
-    research: Microscope,
-    project: Brain,
-    publication: BookOpen,
-    people: Users,
-    news: Newspaper,
-    event: CalendarDays,
-    cta: ExternalLink,
+  const symbolByType: Record<BlockType, string> = {
+    manifesto: '::',
+    research: '//',
+    project: '[]',
+    publication: 'PP',
+    people: 'GR',
+    news: 'NW',
+    event: 'EV',
+    cta: '->',
   };
 
   return (
@@ -255,7 +244,7 @@ export default function HomePage() {
 
           <div className="relative grid grid-flow-dense auto-rows-[125px] grid-cols-12 gap-3 md:auto-rows-[138px] lg:auto-rows-[148px]">
             {blocks.map((block, index) => {
-              const Icon = iconByType[block.type];
+              const symbol = symbolByType[block.type];
               const isActive = activeBlockId === block.id;
 
               return (
@@ -275,7 +264,7 @@ export default function HomePage() {
                   >
                     <div className="relative z-[1] flex items-center justify-between">
                       <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{block.meta}</span>
-                      <Icon className="h-4 w-4 text-primary" />
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary">{symbol}</span>
                     </div>
 
                     <div className="relative z-[1] mt-2">

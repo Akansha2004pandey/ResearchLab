@@ -1,17 +1,7 @@
 import { useState } from 'react';
-import type { ElementType } from 'react';
 import { ResearchArea } from '@/data/research';
-import { ChevronDown, Brain, MessageSquare, Eye, Bot, Shield, Heart } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const iconMap: Record<string, ElementType> = {
-  Brain,
-  MessageSquare,
-  Eye,
-  Bot,
-  Shield,
-  Heart,
-};
 
 interface ResearchCardProps {
   area: ResearchArea;
@@ -19,7 +9,12 @@ interface ResearchCardProps {
 
 export function ResearchCard({ area }: ResearchCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const IconComponent = iconMap[area.icon] || Brain;
+  const marker = area.title
+    .split(' ')
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase();
 
   return (
     <div className="group exp-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
@@ -34,7 +29,7 @@ export function ResearchCard({ area }: ResearchCardProps) {
         <div className="absolute bottom-4 left-4 right-4">
           <div className="flex items-center gap-2 text-background">
             <div className="w-10 h-10 rounded-none bg-primary/90 flex items-center justify-center">
-              <IconComponent className="w-5 h-5 text-primary-foreground" />
+              <span className="text-xs font-bold uppercase tracking-[0.08em] text-primary-foreground">{marker}</span>
             </div>
             <h3 className="font-heading text-xl font-semibold">{area.title}</h3>
           </div>

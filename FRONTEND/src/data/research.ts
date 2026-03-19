@@ -23,7 +23,7 @@ export const researchAreas: ResearchArea[] = [
       "New understanding of implicit regularization in gradient descent"
     ],
     relatedPublications: ["pub-1", "pub-2", "pub-5"],
-    icon: "Brain",
+    icon: "BlockA",
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=600&fit=crop"
   },
   {
@@ -38,7 +38,7 @@ export const researchAreas: ResearchArea[] = [
       "Efficient fine-tuning methods for large language models"
     ],
     relatedPublications: ["pub-3", "pub-6"],
-    icon: "MessageSquare",
+    icon: "BlockB",
     image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&h=600&fit=crop"
   },
   {
@@ -53,7 +53,7 @@ export const researchAreas: ResearchArea[] = [
       "Efficient models for edge deployment"
     ],
     relatedPublications: ["pub-4", "pub-7"],
-    icon: "Eye",
+    icon: "BlockC",
     image: "https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=800&h=600&fit=crop"
   },
   {
@@ -68,7 +68,7 @@ export const researchAreas: ResearchArea[] = [
       "Novel approaches to sim-to-real transfer"
     ],
     relatedPublications: ["pub-8"],
-    icon: "Bot",
+    icon: "BlockD",
     image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop"
   },
   {
@@ -83,7 +83,7 @@ export const researchAreas: ResearchArea[] = [
       "Guidelines for responsible AI deployment"
     ],
     relatedPublications: ["pub-9"],
-    icon: "Shield",
+    icon: "BlockE",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop"
   },
   {
@@ -98,7 +98,7 @@ export const researchAreas: ResearchArea[] = [
       "Clinical decision support tools deployed in hospitals"
     ],
     relatedPublications: ["pub-10"],
-    icon: "Heart",
+    icon: "BlockF",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop"
   }
 ];

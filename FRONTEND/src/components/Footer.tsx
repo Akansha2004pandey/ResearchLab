@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BrainCircuit, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { Mail, MapPin, ExternalLink } from 'lucide-react';
 
 const quickLinks = [
   { href: '/people', label: 'People' },
@@ -26,7 +26,9 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <BrainCircuit className="w-6 h-6 text-primary-foreground" />
+                <span className="font-heading text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground">
+                  NSUT
+                </span>
               </div>
               <div>
                 <span className="font-heading text-xl font-semibold tracking-tight">

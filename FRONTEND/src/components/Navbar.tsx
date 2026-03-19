@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X, BrainCircuit, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
@@ -67,7 +67,9 @@ export function Navbar() {
               )}
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
-                <BrainCircuit className="h-4 w-4 text-primary-foreground" />
+                <span className="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
+                  NS
+                </span>
               </div>
               <div className="hidden md:block">
                 <span className="font-heading text-[15px] font-semibold tracking-tight text-foreground">

@@ -78,7 +78,7 @@ const DEFAULT_TEMPLATES: Record<AdminResource, Record<string, unknown>> = {
     methodology: '',
     contributions: [],
     related_publication_ids: [],
-    icon: 'Brain',
+    icon: 'Block',
     image: '',
     display_order: 0,
   },

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface DynamicHeroProps {
@@ -68,7 +68,7 @@ export function DynamicHero({ publicationCount, peopleCount, researchCount }: Dy
         <div className="grid w-full gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 backdrop-blur-md">
-              <Sparkles className="h-4 w-4 text-secondary" />
+              <span className="inline-block h-2 w-2 rounded-full bg-secondary" />
               <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">NSUT AI Research System</span>
             </div>
 
