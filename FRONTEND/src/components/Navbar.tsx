@@ -12,8 +12,7 @@ const navLinks = [
   { href: '/research', label: 'Research' },
   { href: '/publications', label: 'Publications' },
   { href: '/funding', label: 'Funding' },
-  { href: '/events', label: 'Events' },
-  { href: '/gallery', label: 'Gallery' },
+  { href: '/timeline', label: 'Lab timeline' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
   { href: '/admin/login', label: 'Admin' },
@@ -55,27 +54,22 @@ export function Navbar() {
   return (
     <>
       <header className="pointer-events-none fixed left-0 right-0 top-0 z-50">
-        <div className="container mx-auto px-4 pt-4 lg:px-8 lg:pt-6">
+        <div className="container mx-auto px-4 pt-2 lg:px-8 lg:pt-3">
           <div className="pointer-events-auto flex items-center justify-between gap-2">
             <Link
               to="/"
               className={cn(
-                'group inline-flex items-center gap-3 rounded-full border px-3 py-2 backdrop-blur-xl transition-all duration-300',
+                'group inline-flex items-center rounded-full border px-4 py-2 backdrop-blur-xl transition-all duration-300',
                 scrolled
                   ? 'border-border bg-background/85 shadow-card'
                   : 'border-border/60 bg-background/55'
               )}
             >
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-secondary">
-                <span className="font-heading text-[11px] font-bold uppercase tracking-[0.08em] text-primary-foreground">
-                  NS
-                </span>
-              </div>
-              <div className="hidden md:block">
+              <div>
                 <span className="font-heading text-[15px] font-semibold tracking-tight text-foreground">
-                  Artificial Intelligence Lab
+                  Next Gen AI Lab
                 </span>
-                <span className="block text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                <span className="block text-[10px] tracking-[0.12em] text-muted-foreground max-sm:hidden">
                   NSUT Delhi
                 </span>
               </div>
@@ -86,7 +80,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 className={cn(
-                  'group rounded-full border px-5 font-heading text-sm tracking-wide backdrop-blur-xl',
+                  'group rounded-full border px-5 text-sm backdrop-blur-xl',
                   isOpen ? 'border-primary bg-primary text-primary-foreground' : 'border-border bg-background/70'
                 )}
                 onClick={() => setIsOpen((v) => !v)}
@@ -119,28 +113,29 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', stiffness: 260, damping: 28 }}
-              className="noise-surface brutal-border absolute left-0 top-0 flex h-full w-full max-w-2xl flex-col overflow-y-auto bg-background px-6 py-24 md:px-10"
+              className="absolute left-0 top-0 flex h-full w-full max-w-xl flex-col overflow-y-auto border-r border-border/70 bg-background px-6 py-14 md:px-8"
             >
-              <p className="mb-5 text-xs uppercase tracking-[0.26em] text-muted-foreground">Explore</p>
+              <p className="mb-5 text-xs text-muted-foreground">Explore</p>
               <ul className="space-y-2">
                 {navLinks.map((link, index) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 + index * 0.03 }}
-                  >
-                    <Link
-                      to={link.href}
-                      className={cn(
-                        'group flex items-center justify-between rounded-xl px-3 py-2 transition-colors',
-                        location.pathname === link.href ? 'bg-accent text-foreground' : 'hover:bg-muted/65 text-muted-foreground hover:text-foreground'
-                      )}
+                  <li key={link.href}>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 + index * 0.03 }}
                     >
-                      <span className="font-heading text-3xl font-semibold tracking-tight md:text-4xl">{link.label}</span>
-                      <ArrowUpRight className="h-5 w-5 opacity-50 transition-opacity group-hover:opacity-100" />
-                    </Link>
-                  </motion.li>
+                      <Link
+                        to={link.href}
+                        className={cn(
+                          'group flex items-center justify-between rounded-xl px-3 py-2 transition-colors',
+                          location.pathname === link.href ? 'bg-accent text-foreground' : 'hover:bg-muted/65 text-muted-foreground hover:text-foreground'
+                        )}
+                      >
+                        <span className="font-heading text-xl font-semibold md:text-2xl">{link.label}</span>
+                        <ArrowUpRight className="h-5 w-5 opacity-50 transition-opacity group-hover:opacity-100" />
+                      </Link>
+                    </motion.div>
+                  </li>
                 ))}
               </ul>
 
