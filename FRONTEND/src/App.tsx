@@ -8,8 +8,7 @@ import PeoplePage from "./pages/PeoplePage";
 import ResearchPage from "./pages/ResearchPage";
 import PublicationsPage from "./pages/PublicationsPage";
 import FundingPage from "./pages/FundingPage";
-import EventsPage from "./pages/EventsPage";
-import GalleryPage from "./pages/GalleryPage";
+import TimelinePage from "./pages/TimelinePage";
 import NewsPage from "./pages/NewsPage";
 import ContactPage from "./pages/ContactPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
@@ -31,8 +30,9 @@ const App = () => (
           <Route path="/research" element={<ResearchPage />} />
           <Route path="/publications" element={<PublicationsPage />} />
           <Route path="/funding" element={<FundingPage />} />
-          <Route path="/events" element={<EventsPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/events" element={<TimelinePage />} />
+          <Route path="/gallery" element={<TimelinePage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
