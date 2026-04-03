@@ -13,7 +13,6 @@ const resourceParamSchema = z.enum([
   'grants',
   'events',
   'news',
-  'gallery_images',
   'contact_messages',
 ]);
 
@@ -26,7 +25,6 @@ const ORDERABLE_RESOURCES = new Set([
   'grants',
   'events',
   'news',
-  'gallery_images',
 ]);
 
 const TEXT_ID_RESOURCES = new Set([
@@ -36,7 +34,6 @@ const TEXT_ID_RESOURCES = new Set([
   'grants',
   'events',
   'news',
-  'gallery_images',
 ]);
 
 function resourceFromParam(input: string) {

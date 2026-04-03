@@ -7,7 +7,6 @@ export type AdminResource =
   | 'grants'
   | 'events'
   | 'news'
-  | 'gallery_images'
   | 'contact_messages';
 
 export interface AdminUser {

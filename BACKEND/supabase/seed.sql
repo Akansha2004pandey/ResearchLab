@@ -550,7 +550,7 @@ insert into grants (
 );
 
 insert into events (
-  id, title, type, date, end_date, time, venue, description, full_description, speaker, speaker_affiliation, poster_image, registration_url, status, display_order
+  id, title, type, date, end_date, time, venue, description, full_description, speaker, speaker_affiliation, poster_image, images, registration_url, status, display_order
 ) values
 -- ─────────────────────────────────────────────
 -- EVENTS  (real data from CV_Ankur.pdf)
@@ -568,6 +568,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'NSUT, New Delhi',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   1
@@ -585,6 +590,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'NSUT, New Delhi',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1560439513-74b037a25d84?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   2
@@ -602,6 +612,11 @@ insert into events (
   null,
   null,
   'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop',
+  ARRAY[
+    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   3
@@ -619,6 +634,11 @@ insert into events (
   null,
   null,
   'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
+  ARRAY[
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   4
@@ -636,6 +656,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'NSUT, New Delhi',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop'
+  ],
   'https://ai4humanitydelhi.in/',
   'past',
   5
@@ -653,6 +678,11 @@ insert into events (
   null,
   null,
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   6
@@ -670,6 +700,11 @@ insert into events (
   null,
   null,
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   7
@@ -687,6 +722,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'IIT Roorkee',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   8
@@ -704,6 +744,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'IIT Roorkee',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   9
@@ -721,6 +766,11 @@ insert into events (
   'Dr. Ankur Gupta',
   'NSUT, New Delhi',
   null,
+  ARRAY[
+    'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop'
+  ],
   null,
   'past',
   10

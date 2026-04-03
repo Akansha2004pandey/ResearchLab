@@ -83,12 +83,15 @@ create table if not exists events (
   speaker text,
   speaker_affiliation text,
   poster_image text,
+  images text[] not null default '{}',
   registration_url text,
   status text not null check (status in ('upcoming', 'ongoing', 'past')),
   display_order int not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table events add column if not exists images text[] not null default '{}';
 
 create table if not exists news (
   id text primary key,

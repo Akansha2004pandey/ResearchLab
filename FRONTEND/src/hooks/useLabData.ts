@@ -5,6 +5,7 @@ import {
   fetchResearchAreas,
   fetchGrants,
   fetchEvents,
+  fetchTimeline,
   fetchNews,
   fetchGallery,
 } from '@/lib/api';
@@ -48,6 +49,13 @@ export function useEvents() {
   return useQuery<LabEvent[], Error>({
     queryKey: ['events'],
     queryFn: fetchEvents,
+  });
+}
+
+export function useTimeline() {
+  return useQuery<LabEvent[], Error>({
+    queryKey: ['timeline'],
+    queryFn: fetchTimeline,
   });
 }
 

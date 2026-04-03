@@ -13,6 +13,7 @@ export interface LabEvent {
   speaker?: string;
   speakerAffiliation?: string;
   posterImage?: string;
+  images: string[];
   registrationUrl?: string;
   status: 'upcoming' | 'ongoing' | 'past';
 }
@@ -29,6 +30,11 @@ export const events: LabEvent[] = [
     fullDescription: "Join us for an in-depth seminar on AI safety and alignment. We'll explore current research directions, open problems, and practical approaches to building AI systems that behave as intended. The talk will cover topics including reward hacking, distributional shift, and value alignment.",
     speaker: "Dr. Stuart Armstrong",
     speakerAffiliation: "Future of Humanity Institute, Oxford",
+    images: [
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop"
+    ],
     status: "upcoming",
     registrationUrl: "#"
   },
@@ -42,6 +48,12 @@ export const events: LabEvent[] = [
     description: "Three-day intensive workshop on the latest advances in machine learning.",
     fullDescription: "Our flagship annual workshop brings together researchers from academia and industry to discuss cutting-edge developments in machine learning. Features keynote speeches, paper presentations, poster sessions, and networking events.",
     posterImage: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=900&fit=crop"
+    ],
     status: "upcoming",
     registrationUrl: "#"
   },
@@ -55,6 +67,11 @@ export const events: LabEvent[] = [
     description: "48-hour hackathon focused on building practical NLP applications.",
     fullDescription: "Team up with fellow students and researchers to build innovative NLP applications. Prizes for best projects. Mentorship from lab members and industry sponsors available throughout the event.",
     posterImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1200&h=900&fit=crop"
+    ],
     status: "upcoming",
     registrationUrl: "#"
   },
@@ -69,6 +86,11 @@ export const events: LabEvent[] = [
     fullDescription: "This webinar provides a gentle introduction to graph neural networks for those new to the field. We'll cover the basics of graph representation learning, popular GNN architectures, and real-world applications.",
     speaker: "James Wilson",
     speakerAffiliation: "Artificial Intelligence Lab",
+    images: [
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&h=900&fit=crop"
+    ],
     status: "upcoming",
     registrationUrl: "#"
   },
@@ -81,6 +103,11 @@ export const events: LabEvent[] = [
     venue: "Community Center, Downtown",
     description: "Bringing AI education to underserved communities through hands-on workshops.",
     fullDescription: "Part of our ongoing commitment to making AI accessible to all. Lab members will lead interactive workshops introducing basic AI concepts to high school students from underrepresented backgrounds.",
+    images: [
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop"
+    ],
     status: "upcoming"
   },
   {
@@ -93,6 +120,11 @@ export const events: LabEvent[] = [
     description: "Two-day symposium on applications of deep learning in healthcare.",
     fullDescription: "This symposium brought together clinicians, researchers, and industry partners to discuss the latest developments in AI for healthcare. Keynote speakers from leading medical AI companies shared insights on deployment challenges and success stories.",
     posterImage: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=900&fit=crop"
+    ],
     status: "past"
   },
   {
@@ -105,6 +137,11 @@ export const events: LabEvent[] = [
     description: "Overview of recent advances in reinforcement learning theory and practice.",
     speaker: "Sarah Mitchell",
     speakerAffiliation: "Artificial Intelligence Lab",
+    images: [
+      "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop"
+    ],
     status: "past"
   },
   {
@@ -116,6 +153,11 @@ export const events: LabEvent[] = [
     venue: "Online (Zoom)",
     description: "Panel discussion with AI professionals from top tech companies.",
     fullDescription: "Alumni and industry partners discussed career paths in AI, sharing advice on breaking into the field and advancing your career. Topics included research vs. industry, startup vs. large company, and emerging roles in AI.",
+    images: [
+      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop"
+    ],
     status: "past"
   },
   {
@@ -128,6 +170,11 @@ export const events: LabEvent[] = [
     description: "Hands-on workshop covering modern computer vision techniques.",
     fullDescription: "Participants learned to implement state-of-the-art computer vision models, from classical techniques to modern deep learning approaches. The workshop included practical sessions on object detection, segmentation, and video analysis.",
     posterImage: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=900&fit=crop"
+    ],
     status: "past"
   },
   {
@@ -139,6 +186,11 @@ export const events: LabEvent[] = [
     venue: "CS Department",
     description: "Open house for prospective PhD students interested in AI research.",
     fullDescription: "Prospective students met with current lab members, toured facilities, and learned about our research programs. The event included research presentations, Q&A sessions, and informal discussions over lunch.",
+    images: [
+      "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1200&h=900&fit=crop",
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=900&fit=crop"
+    ],
     status: "past"
   }
 ];

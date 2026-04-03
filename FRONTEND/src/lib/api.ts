@@ -103,6 +103,7 @@ function mapEvent(r: Row): LabEvent {
     speaker: r.speaker as string | undefined,
     speakerAffiliation: r.speaker_affiliation as string | undefined,
     posterImage: r.poster_image as string | undefined,
+    images: (r.images as string[]) ?? [],
     registrationUrl: r.registration_url as string | undefined,
     status: r.status as LabEvent['status'],
   };
@@ -156,6 +157,11 @@ export async function fetchGrants(): Promise<Grant[]> {
 
 export async function fetchEvents(): Promise<LabEvent[]> {
   const rows = await apiFetch<Row[]>('/events');
+  return rows.map(mapEvent);
+}
+
+export async function fetchTimeline(): Promise<LabEvent[]> {
+  const rows = await apiFetch<Row[]>('/timeline');
   return rows.map(mapEvent);
 }
 

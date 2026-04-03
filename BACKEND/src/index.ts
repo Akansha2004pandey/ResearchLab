@@ -15,6 +15,7 @@ import { newsRouter } from './routes/news.js';
 import { peopleRouter } from './routes/people.js';
 import { publicationsRouter } from './routes/publications.js';
 import { researchRouter } from './routes/research.js';
+import { timelineRouter } from './routes/timeline.js';
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/research', researchRouter);
 app.use('/api/publications', publicationsRouter);
 app.use('/api/grants', grantsRouter);
 app.use('/api/events', eventsRouter);
+app.use('/api/timeline', timelineRouter);
 app.use('/api/news', newsRouter);
 app.use('/api/gallery', galleryRouter);
 app.use('/api/contact', contactRouter);

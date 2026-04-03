@@ -33,9 +33,8 @@ const RESOURCE_CONFIG: Array<{ key: AdminResource; label: string; description: s
   { key: 'research_areas', label: 'Research', description: 'Research cards and details' },
   { key: 'publications', label: 'Publications', description: 'Papers, patents, and records' },
   { key: 'grants', label: 'Grants', description: 'Funding opportunities and grants' },
-  { key: 'events', label: 'Events', description: 'Upcoming and past events' },
+  { key: 'events', label: 'Lab Timeline', description: 'Events with event-specific photo galleries' },
   { key: 'news', label: 'News', description: 'News and announcements' },
-  { key: 'gallery_images', label: 'Gallery', description: 'Photo gallery cards' },
   { key: 'contact_messages', label: 'Contact Messages', description: 'Messages from contact form' },
 ];
 
@@ -45,6 +44,7 @@ const ARRAY_KEYS = new Set([
   'co_pis',
   'contributions',
   'related_publication_ids',
+  'images',
 ]);
 
 const BOOLEAN_KEYS = new Set(['featured']);
@@ -124,6 +124,7 @@ const DEFAULT_TEMPLATES: Record<AdminResource, Record<string, unknown>> = {
     speaker: '',
     speaker_affiliation: '',
     poster_image: '',
+    images: [],
     registration_url: '',
     status: 'upcoming',
     display_order: 0,
@@ -136,15 +137,6 @@ const DEFAULT_TEMPLATES: Record<AdminResource, Record<string, unknown>> = {
     description: '',
     image: '',
     link: '',
-    display_order: 0,
-  },
-  gallery_images: {
-    id: '',
-    src: '',
-    alt: '',
-    caption: '',
-    category: 'lab',
-    date: '',
     display_order: 0,
   },
   contact_messages: {
@@ -205,10 +197,8 @@ const FIELD_LABELS: Record<string, string> = {
   speaker: 'Speaker',
   speaker_affiliation: 'Speaker Affiliation',
   poster_image: 'Poster Image URL',
+  images: 'Event Images (comma separated URLs)',
   registration_url: 'Registration URL',
-  src: 'Image URL',
-  alt: 'Alt Text',
-  caption: 'Caption',
   subject: 'Subject',
   message: 'Message',
 };
@@ -241,7 +231,12 @@ function subtitleItem(item: Record<string, unknown>) {
 }
 
 function previewImage(item: Record<string, unknown>) {
+  const timelineImages = Array.isArray(item.images)
+    ? (item.images.find((value) => typeof value === 'string' && value.trim()) as string | undefined)
+    : undefined;
+
   const imageValue =
+    timelineImages ||
     (typeof item.image === 'string' && item.image) ||
     (typeof item.src === 'string' && item.src) ||
     (typeof item.poster_image === 'string' && item.poster_image) ||
@@ -263,9 +258,6 @@ function previewText(resource: AdminResource, item: Record<string, unknown>) {
   }
   if (resource === 'grants') {
     return `${item.agency ?? ''} ${item.amount ? `• ${item.amount}` : ''}`.trim();
-  }
-  if (resource === 'gallery_images') {
-    return `${item.category ?? ''} ${item.date ? `• ${item.date}` : ''}`.trim();
   }
   return subtitleItem(item);
 }
@@ -550,7 +542,7 @@ export default function AdminDashboardPage() {
           <div className="grid gap-4 py-2">
             {editorFields.map((field) => (
               <div key={field} className="space-y-2">
-                <Label htmlFor={field}>{FIELD_LABELS[field] ?? field.replaceAll('_', ' ')}</Label>
+                <Label htmlFor={field}>{FIELD_LABELS[field] ?? field.replace(/_/g, ' ')}</Label>
                 {IMAGE_FIELDS.has(field) ? (
                   <div className="space-y-3">
                     {form[field] ? (
