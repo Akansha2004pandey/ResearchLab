@@ -5,7 +5,7 @@ const quickLinks = [
   { href: '/people', label: 'People' },
   { href: '/research', label: 'Research' },
   { href: '/publications', label: 'Publications' },
-  { href: '/events', label: 'Events' },
+  { href: '/timeline', label: 'Lab timeline' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
 ];
@@ -19,38 +19,33 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-foreground text-background">
-      <div className="pointer-events-none absolute -top-24 right-10 h-56 w-56 rounded-full bg-primary/20 blur-3xl" />
-      <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+    <footer className="border-t border-border/60 bg-muted/35">
+      <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-10">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="font-heading text-sm font-bold uppercase tracking-[0.12em] text-primary-foreground">
-                  NSUT
-                </span>
+            <Link to="/" className="inline-flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/12 text-sm font-semibold text-primary">
+                NG
               </div>
               <div>
-                <span className="font-heading text-xl font-semibold tracking-tight">
-                  Artificial Intelligence Lab
-                </span>
-                <span className="block text-xs uppercase tracking-[0.18em] opacity-70">
-                  Netaji Subhas University of Technology
-                </span>
+                <p className="text-lg font-semibold text-foreground">Next Gen AI Lab</p>
+                <p className="text-sm text-muted-foreground">Netaji Subhas University of Technology, Delhi</p>
               </div>
             </Link>
-            <p className="mb-6 max-w-md text-sm opacity-80">
-              We build practical AI systems grounded in rigorous research, open science,
-              and long-term collaboration across academia, government, and industry.
+
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+              The lab develops machine learning methods and practical systems in language processing,
+              computer vision, and responsible AI.
             </p>
-            <div className="flex flex-col gap-2 text-sm opacity-80">
+
+            <div className="mt-3 space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Netaji Subhas University of Technology, Delhi</span>
+                <MapPin className="h-4 w-4" />
+                <span>NSUT Campus, New Delhi</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <a href="mailto:ankur.gupta@nsut.ac.in" className="hover:opacity-100 transition-opacity">
+                <Mail className="h-4 w-4" />
+                <a href="mailto:ankur.gupta@nsut.ac.in" className="transition-colors hover:text-foreground">
                   ankur.gupta@nsut.ac.in
                 </a>
               </div>
@@ -58,14 +53,11 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">Navigate</h3>
+            <h3 className="mb-2 text-base font-medium text-foreground">Quick links</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm opacity-80 transition-opacity hover:opacity-100"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                     {link.label}
                   </Link>
                 </li>
@@ -74,7 +66,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-heading text-lg font-semibold mb-4">Research Profiles</h3>
+            <h3 className="mb-2 text-base font-medium text-foreground">Profiles</h3>
             <ul className="space-y-2">
               {socialLinks.map((link) => (
                 <li key={link.href}>
@@ -82,10 +74,10 @@ export function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm opacity-80 transition-opacity hover:opacity-100"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
-                    <ExternalLink className="w-3 h-3" />
+                    <ExternalLink className="h-3 w-3" />
                   </a>
                 </li>
               ))}
@@ -93,10 +85,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-background/15 pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 text-sm opacity-65 md:flex-row">
-            <p>© {new Date().getFullYear()} Artificial Intelligence Lab. All rights reserved.</p>
-            <p>Part of the Department of Computer Science</p>
+        <div className="mt-6 border-t border-border/70 pt-4 text-sm text-muted-foreground">
+          <div className="flex flex-col justify-between gap-2 md:flex-row">
+            <p>© {new Date().getFullYear()} Next Gen AI Lab</p>
+            <p>Department of Computer Science, NSUT Delhi</p>
           </div>
         </div>
       </div>

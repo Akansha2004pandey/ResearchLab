@@ -8,7 +8,7 @@ interface SectionProps {
 
 export function Section({ children, className, id }: SectionProps) {
   return (
-    <section id={id} className={cn('py-12 lg:py-16', className)}>
+    <section id={id} className={cn('py-8 lg:py-12', className)}>
       <div className="container mx-auto px-4 lg:px-8">
         {children}
       </div>
@@ -25,12 +25,12 @@ interface SectionHeaderProps {
 
 export function SectionHeader({ title, subtitle, className, align = 'left' }: SectionHeaderProps) {
   return (
-    <div className={cn('mb-8 lg:mb-12', align === 'center' && 'text-center', className)}>
-      <h2 className="font-heading text-[clamp(1.7rem,3.2vw,3.2rem)] font-semibold uppercase leading-[0.95] tracking-[-0.02em] text-foreground mb-3">
+    <div className={cn('mb-6 lg:mb-8', align === 'center' && 'text-center', className)}>
+      <h2 className="font-heading text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight text-foreground mb-3">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        <p className={cn('text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed', align === 'center' && 'mx-auto')}>
           {subtitle}
         </p>
       )}

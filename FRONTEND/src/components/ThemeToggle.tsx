@@ -11,11 +11,11 @@ export function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isNoir ? 'theme-aurora' : 'dark')}
       aria-label={isNoir ? 'Switch to Aurora theme' : 'Switch to Noir theme'}
-      className="noise-surface brutal-border inline-flex h-9 w-14 items-center border border-border/80 bg-background/80 p-1 backdrop-blur-md"
+      className="inline-flex h-9 w-14 items-center border border-border/70 bg-background/90 p-1 rounded-full"
     >
       <span
         className={cn(
-          'flex h-6 w-6 items-center justify-center rounded-none bg-primary text-primary-foreground transition-transform duration-300',
+          'flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300',
           isNoir ? 'translate-x-6' : 'translate-x-0'
         )}
       >

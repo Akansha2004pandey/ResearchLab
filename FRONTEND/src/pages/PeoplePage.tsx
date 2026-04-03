@@ -50,7 +50,7 @@ export default function PeoplePage() {
 
         return (
           <Section key={category} className="border-t border-border/70">
-            <h2 className="text-2xl font-heading font-semibold uppercase tracking-[0.04em] text-foreground mb-6">
+            <h2 className="text-2xl font-heading font-semibold text-foreground mb-6">
               {categoryLabels[category]}
             </h2>
             <div className="grid grid-cols-12 gap-6">

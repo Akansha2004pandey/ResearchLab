@@ -69,7 +69,7 @@ export function DynamicHero({ publicationCount, peopleCount, researchCount }: Dy
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2 backdrop-blur-md">
               <span className="inline-block h-2 w-2 rounded-full bg-secondary" />
-              <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">NSUT AI Research System</span>
+              <span className="text-xs text-muted-foreground">NSUT AI Research System</span>
             </div>
 
             <h1 className="font-heading text-balance text-4xl font-semibold leading-[0.98] tracking-tight text-foreground md:text-6xl xl:text-7xl">
@@ -106,7 +106,7 @@ export function DynamicHero({ publicationCount, peopleCount, researchCount }: Dy
               { label: 'Research domains', value: researchCount },
             ].map((metric) => (
               <div key={metric.label} className="flex items-end justify-between border-b border-border/70 py-3 last:border-b-0">
-                <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{metric.label}</span>
+                <span className="text-xs text-muted-foreground">{metric.label}</span>
                 <span className="font-heading text-3xl font-semibold tracking-tight text-foreground">{metric.value}</span>
               </div>
             ))}

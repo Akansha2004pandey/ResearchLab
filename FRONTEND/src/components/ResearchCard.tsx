@@ -14,7 +14,7 @@ export function ResearchCard({ area }: ResearchCardProps) {
     .slice(0, 2)
     .map((part) => part[0])
     .join('')
-    .toUpperCase();
+    .toLowerCase();
 
   return (
     <div className="group exp-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover">
@@ -29,7 +29,7 @@ export function ResearchCard({ area }: ResearchCardProps) {
         <div className="absolute bottom-4 left-4 right-4">
           <div className="flex items-center gap-2 text-background">
             <div className="w-10 h-10 rounded-none bg-primary/90 flex items-center justify-center">
-              <span className="text-xs font-bold uppercase tracking-[0.08em] text-primary-foreground">{marker}</span>
+              <span className="text-xs font-semibold text-primary-foreground">{marker}</span>
             </div>
             <h3 className="font-heading text-xl font-semibold">{area.title}</h3>
           </div>

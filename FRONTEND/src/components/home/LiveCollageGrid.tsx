@@ -82,7 +82,7 @@ export function LiveCollageGrid({ researchAreas, publications, events, news }: L
       <div className="container mx-auto px-4 lg:px-8">
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Live Content Grid</p>
+            <p className="text-xs text-muted-foreground">Live content grid</p>
             <h2 className="font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">Research Collage</h2>
           </div>
           <p className="max-w-xl text-sm text-muted-foreground">
@@ -108,7 +108,7 @@ export function LiveCollageGrid({ researchAreas, publications, events, news }: L
                 >
                   <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-primary/15 blur-2xl transition-all duration-300 group-hover:bg-secondary/20" />
                   <div className="relative flex items-center justify-between">
-                    <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{tile.kind}</span>
+                    <span className="text-[10px] capitalize text-muted-foreground">{tile.kind}</span>
                     <Icon className="h-4 w-4 text-primary" />
                   </div>
                   <div className="relative">
