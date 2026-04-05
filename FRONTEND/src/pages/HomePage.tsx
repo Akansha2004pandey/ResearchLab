@@ -183,14 +183,17 @@ export default function HomePage() {
                   key={person.id}
                   className="rounded-2xl border border-border/70 bg-background p-4 shadow-sm transition-shadow duration-200 hover:shadow-md"
                 >
-                  <img
-                    src={person.image}
-                    alt={person.name}
-                    className="h-44 w-full rounded-xl object-cover"
-                  />
-                  <div className="mt-4">
+                  {person.id === 'pi-1' && person.image ? (
+                    <img
+                      src={person.image}
+                      alt={person.name}
+                      className="h-44 w-full rounded-xl object-cover"
+                    />
+                  ) : null}
+                  <div className={person.id === 'pi-1' && person.image ? 'mt-4' : ''}>
                     <h3 className="text-base font-medium text-foreground">{person.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{person.role}</p>
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{person.bio}</p>
                   </div>
                 </article>
               ))}

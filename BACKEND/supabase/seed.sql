@@ -120,6 +120,313 @@ insert into people (
   2025, null, null, 9
 );
 
+-- Updated people roster (provided by lab)
+delete from people where id <> 'pi-1';
+
+update people
+set
+  role = 'Principal Investigator & Assistant Professor',
+  image = '/professor-ankur-gupta-square.png',
+  bio = 'Dr. Ankur Gupta leads the lab''s research in microfluidics, AI, medical imaging, and intelligent transportation systems.',
+  research_interests = ARRAY['Microfluidics', 'Machine Learning', 'Deep Learning', 'Computer Vision'],
+  year_joined = 2023,
+  display_order = 1
+where id = 'pi-1';
+
+insert into people (
+  id, name, role, category, image, bio, research_interests, display_order
+) values
+(
+  'phd-md-imran-hussain',
+  'Md Imran Hussain',
+  'PhD Scholar',
+  'phd',
+  '',
+  'PhD researcher working on resilient AI methods for secure connected systems.',
+  ARRAY['Resilient AI', 'Cyber-Physical Security'],
+  2
+),
+(
+  'phd-purrnima-singh',
+  'Purrnima Singh',
+  'PhD Scholar',
+  'phd',
+  '',
+  'PhD researcher exploring machine learning methods for practical real-world deployment.',
+  ARRAY['Machine Learning', 'Applied AI'],
+  3
+),
+(
+  'fellow-yash-gupta',
+  'Yash Gupta',
+  'Project Fellow',
+  'staff',
+  '',
+  'Project fellow contributing to funded lab projects in AI and microfluidic design automation.',
+  ARRAY['Microfluidics', 'Design Automation'],
+  4
+),
+(
+  'intern-sarthak-agarwal',
+  'Sarthak Agarwal',
+  'Summer Intern',
+  'staff',
+  '',
+  'Summer intern supporting experimental AI pipelines and literature studies.',
+  ARRAY['Machine Learning', 'Data Analysis'],
+  5
+),
+(
+  'intern-varun-kumar',
+  'Varun Kumar',
+  'Summer Intern',
+  'staff',
+  '',
+  'Summer intern assisting research prototypes and benchmark experiments.',
+  ARRAY['Applied AI', 'Research Prototyping'],
+  6
+),
+(
+  'mtech-rajat-kumar-varshney',
+  'Rajat Kumar Varshney',
+  'M.Tech Scholar',
+  'masters',
+  '',
+  'M.Tech researcher working on advanced machine learning model development.',
+  ARRAY['Machine Learning', 'Model Development'],
+  7
+),
+(
+  'mtech-pankaj',
+  'Pankaj',
+  'M.Tech Scholar',
+  'masters',
+  '',
+  'M.Tech researcher contributing to AI algorithm implementation and evaluation.',
+  ARRAY['Artificial Intelligence', 'Evaluation Methods'],
+  8
+),
+(
+  'mtech-kuldeep-singh',
+  'Kuldeep Singh',
+  'M.Tech Scholar',
+  'masters',
+  '',
+  'M.Tech researcher focused on robust learning methods and deployment workflows.',
+  ARRAY['Robust ML', 'Deployment'],
+  9
+),
+(
+  'mtech-aditya-chouksey',
+  'Aditya Chouksey',
+  'M.Tech Scholar',
+  'masters',
+  '',
+  'M.Tech researcher supporting data-driven system design and optimization.',
+  ARRAY['Optimization', 'Data-Driven Systems'],
+  10
+),
+(
+  'btech-vansh-kakkar',
+  'Vansh Kakkar',
+  'B.Tech, 4th Year, CSAI',
+  'undergrad',
+  '',
+  'Undergraduate researcher working on AI-assisted healthcare applications.',
+  ARRAY['Healthcare AI', 'Computer Vision'],
+  11
+),
+(
+  'btech-madhav-arora',
+  'Madhav Arora',
+  'B.Tech, 4th Year, CSAI',
+  'undergrad',
+  '',
+  'Undergraduate researcher contributing to deep learning experiments.',
+  ARRAY['Deep Learning', 'Medical AI'],
+  12
+),
+(
+  'btech-ocean-lakra',
+  'Ocean Lakra',
+  'B.Tech, 4th Year, CSE',
+  'undergrad',
+  '',
+  'Undergraduate researcher exploring practical ML deployment techniques.',
+  ARRAY['ML Deployment', 'Software Systems'],
+  13
+),
+(
+  'btech-aniket-negi',
+  'Aniket Negi',
+  'B.Tech, 3rd Year, Mechanical',
+  'undergrad',
+  '',
+  'Undergraduate researcher supporting interdisciplinary AI engineering tasks.',
+  ARRAY['Interdisciplinary AI', 'Engineering Applications'],
+  14
+),
+(
+  'btech-ayush-thakur',
+  'Ayush Thakur',
+  'B.Tech, 3rd Year, CSE',
+  'undergrad',
+  '',
+  'Undergraduate researcher assisting with data preparation and model training.',
+  ARRAY['Data Pipelines', 'Model Training'],
+  15
+),
+(
+  'btech-deepak',
+  'Deepak',
+  'B.Tech, 3rd Year, CSAI',
+  'undergrad',
+  '',
+  'Undergraduate researcher working on foundational AI and analytics tasks.',
+  ARRAY['Artificial Intelligence', 'Analytics'],
+  16
+),
+(
+  'btech-harshdip-saha',
+  'Harshdip Saha',
+  'B.Tech, 3rd Year, CSAI',
+  'undergrad',
+  '',
+  'Undergraduate researcher supporting experimentation and baseline studies.',
+  ARRAY['Experimentation', 'Baseline Models'],
+  17
+),
+(
+  'btech-harshanth-raja',
+  'Harshanth Raja',
+  'B.Tech, 4th Year, CSE',
+  'undergrad',
+  '',
+  'Undergraduate researcher focused on practical implementation and evaluation.',
+  ARRAY['Implementation', 'Evaluation'],
+  18
+),
+(
+  'btech-sameeksha-ahlawat',
+  'Sameeksha Ahlawat',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher contributing to ongoing AI project tasks.',
+  ARRAY['Applied AI', 'Project Development'],
+  19
+),
+(
+  'btech-vyshnavi-kotha',
+  'Vyshnavi Kotha',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher working on model benchmarking and analysis.',
+  ARRAY['Benchmarking', 'Model Analysis'],
+  20
+),
+(
+  'btech-harsh-gahlawat',
+  'Harsh Gahlawat',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher assisting in research implementation workflows.',
+  ARRAY['Research Implementation', 'Software Tooling'],
+  21
+),
+(
+  'btech-kshitij-singh',
+  'Kshitij Singh',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher supporting experimentation in lab projects.',
+  ARRAY['Applied ML', 'Experiments'],
+  22
+),
+(
+  'btech-gopal-kumar',
+  'Gopal Kumar',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher focused on data processing and validation.',
+  ARRAY['Data Engineering', 'Validation'],
+  23
+),
+(
+  'btech-mohd-imaad',
+  'Mohd Imaad',
+  'B.Tech Undergraduate Researcher',
+  'undergrad',
+  '',
+  'Undergraduate researcher contributing to AI prototype development.',
+  ARRAY['Prototyping', 'Applied AI'],
+  24
+),
+(
+  'alumni-vinit-singroha',
+  'Vinit Singroha',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member with contributions to AI-driven medical imaging projects.',
+  ARRAY['Medical Imaging', 'Deep Learning'],
+  25
+),
+(
+  'alumni-rithik-kumar',
+  'Rithik Kumar',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member who worked on machine learning methods for healthcare.',
+  ARRAY['Healthcare AI', 'Machine Learning'],
+  26
+),
+(
+  'alumni-farhan-khan',
+  'Farhan Khan',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member with interests in practical AI systems development.',
+  ARRAY['AI Systems', 'Software Engineering'],
+  27
+),
+(
+  'alumni-anant-kumar',
+  'Anant Kumar',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member involved in research implementation and experimentation.',
+  ARRAY['Modeling', 'Experimental AI'],
+  28
+),
+(
+  'alumni-prasad-shivaji-ambekar',
+  'Prasad Shivaji Ambekar',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member contributing to projects in computational intelligence.',
+  ARRAY['Computational Intelligence', 'Applied ML'],
+  29
+),
+(
+  'alumni-divyanshu-singh',
+  'Divyanshu Singh',
+  'Alumni',
+  'alumni',
+  '',
+  'Former lab member supporting AI model development and validation.',
+  ARRAY['AI Models', 'Validation'],
+  30
+);
+
 -- ─────────────────────────────────────────────
 -- PUBLICATIONS  (real data from CV_Ankur.pdf)
 -- ─────────────────────────────────────────────

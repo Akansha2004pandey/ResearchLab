@@ -6,7 +6,7 @@ import { categoryLabels, Person } from '@/data/people';
 import { usePeople } from '@/hooks/useLabData';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const categoryOrder: Person['category'][] = ['faculty', 'phd', 'masters', 'undergrad', 'staff', 'alumni'];
+const categoryOrder: Person['category'][] = ['faculty', 'phd', 'staff', 'masters', 'undergrad', 'alumni'];
 
 export default function PeoplePage() {
   const { data: people = [], isLoading } = usePeople();

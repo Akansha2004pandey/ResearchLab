@@ -30,7 +30,7 @@ function mapPerson(r: Row): Person {
     name: r.name as string,
     role: r.role as string,
     category: r.category as Person['category'],
-    image: (r.image as string) || '/placeholder.svg',
+    image: typeof r.image === 'string' ? r.image : '',
     bio: r.bio as string,
     researchInterests: (r.research_interests as string[]) ?? [],
     email: r.email as string | undefined,
