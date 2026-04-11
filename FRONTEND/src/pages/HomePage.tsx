@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import {
   useEvents,
   useGrants,
+  useNews,
   usePeople,
   usePublications,
   useResearchAreas,
@@ -16,6 +17,9 @@ import { people as fallbackPeople } from '@/data/people';
 import { publications as fallbackPublications } from '@/data/publications';
 import { events as fallbackEvents } from '@/data/events';
 import { grants as fallbackGrants } from '@/data/grants';
+import { news as fallbackNews } from '@/data/news';
+
+const TIMELINE_START_DATE = '2023-02-01';
 
 function parseGrantAmount(amount?: string): number {
   if (!amount) return 0;
@@ -46,13 +50,15 @@ export default function HomePage() {
   const { data: publications = [] } = usePublications();
   const { data: events = [] } = useEvents();
   const { data: grants = [] } = useGrants();
+  const { data: news = [] } = useNews();
 
   const researchItems = (researchAreas.length ? researchAreas : fallbackResearchAreas).slice(0, 6);
   const peopleItems = (people.length ? people : fallbackPeople)
     .filter((member) => member.category !== 'alumni')
-    .slice(0, 8);
+    .slice(0, 12);
   const publicationItems = (publications.length ? publications : fallbackPublications).slice(0, 5);
-  const timelineSource = events.length ? events : fallbackEvents;
+  const timelineSource = (events.length ? events : fallbackEvents)
+    .filter((event) => event.date >= TIMELINE_START_DATE);
   const upcomingEvents = timelineSource.filter((event) => event.status !== 'past').slice(0, 3);
   const eventItems = upcomingEvents.length > 0 ? upcomingEvents : timelineSource.slice(0, 3);
   const galleryItems = timelineSource
@@ -71,6 +77,13 @@ export default function HomePage() {
       }));
     })
     .slice(0, 9);
+
+  const awardItems = (news.length ? news : fallbackNews)
+    .filter((item) => item.category === 'award')
+    .slice(0, 4);
+
+  const rollingPeople = peopleItems.length > 0 ? [...peopleItems, ...peopleItems] : [];
+  const rollingGallery = galleryItems.length > 0 ? [...galleryItems, ...galleryItems] : [];
 
   const grantItems = grants.length ? grants : fallbackGrants;
   const activeGrants = grantItems.filter((grant) => grant.status === 'ongoing').length;
@@ -177,24 +190,50 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {peopleItems.map((person) => (
-                <article
-                  key={person.id}
-                  className="rounded-2xl border border-border/70 bg-background p-4 shadow-sm transition-shadow duration-200 hover:shadow-md"
-                >
-                  {person.id === 'pi-1' && person.image ? (
+            <div className="overflow-hidden rounded-2xl border border-border/60 bg-background/60 p-3">
+              <div className="flex w-max gap-4 animate-marquee">
+                {rollingPeople.map((person, index) => (
+                  <article
+                    key={`${person.id}-${index}`}
+                    className="w-[270px] shrink-0 rounded-2xl border border-border/70 bg-card p-3"
+                  >
                     <img
-                      src={person.image}
+                      src={person.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=dbeafe&color=1e3a8a&size=256`}
                       alt={person.name}
-                      className="h-44 w-full rounded-xl object-cover"
+                      className="h-36 w-full rounded-xl object-cover"
                     />
-                  ) : null}
-                  <div className={person.id === 'pi-1' && person.image ? 'mt-4' : ''}>
-                    <h3 className="text-base font-medium text-foreground">{person.name}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{person.role}</p>
-                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{person.bio}</p>
-                  </div>
+                    <h3 className="mt-3 text-base font-medium text-foreground line-clamp-1">{person.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{person.role}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section {...sectionMotion()} className="border-y border-border/60 bg-muted/35 py-10 md:py-12">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-5 flex items-end justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground md:text-3xl">Awards and Recognition</h2>
+                <p className="mt-2 max-w-2xl text-muted-foreground">
+                  Recognitions earned by the lab and its members across conferences and academia.
+                </p>
+              </div>
+              <Link to="/awards" className="text-sm text-primary transition-colors hover:text-primary/80">
+                View all awards
+              </Link>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {awardItems.map((award) => (
+                <article
+                  key={award.id}
+                  className="rounded-2xl border border-border/70 bg-card p-4 shadow-sm transition-shadow duration-200 hover:shadow-md"
+                >
+                  <p className="text-xs text-muted-foreground">{formatDate(award.date)}</p>
+                  <h3 className="mt-1 text-lg font-medium text-foreground">{award.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3">{award.description}</p>
                 </article>
               ))}
             </div>
@@ -278,16 +317,18 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="columns-1 gap-3 sm:columns-2 lg:columns-3">
-              {galleryItems.map((image) => (
-                <figure
-                  key={image.id}
-                  className="mb-3 break-inside-avoid overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm"
-                >
-                  <img src={image.src} alt={image.alt} className="w-full object-cover" />
-                  <figcaption className="p-3 text-sm text-muted-foreground">{image.caption}</figcaption>
-                </figure>
-              ))}
+            <div className="overflow-hidden rounded-2xl border border-border/60 bg-background/60 p-3">
+              <div className="flex w-max gap-4 animate-marquee-slow">
+                {rollingGallery.map((image, index) => (
+                  <figure
+                    key={`${image.id}-${index}`}
+                    className="w-[300px] shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-card shadow-sm"
+                  >
+                    <img src={image.src} alt={image.alt} className="h-44 w-full object-cover" />
+                    <figcaption className="p-3 text-sm text-muted-foreground line-clamp-2">{image.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
         </motion.section>

@@ -11,6 +11,16 @@ export function PublicationCard({ publication }: PublicationCardProps) {
   const [showBibtex, setShowBibtex] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const isUsableLink = (value?: string) =>
+    Boolean(value && value !== '#' && /^https?:\/\//i.test(value));
+
+  const scholarUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(publication.title)}`;
+  const primaryLink =
+    (isUsableLink(publication.pdfUrl) && publication.pdfUrl) ||
+    (isUsableLink(publication.doiUrl) && publication.doiUrl) ||
+    (isUsableLink(publication.codeUrl) && publication.codeUrl) ||
+    scholarUrl;
+
   const copyBibtex = async () => {
     if (publication.bibtex) {
       await navigator.clipboard.writeText(publication.bibtex);
@@ -30,7 +40,9 @@ export function PublicationCard({ publication }: PublicationCardProps) {
         {/* Content */}
         <div className="flex-1 min-w-0">
           <h3 className="font-heading text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-            {publication.title}
+            <a href={primaryLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              {publication.title}
+            </a>
           </h3>
           
           <p className="text-sm text-muted-foreground mb-2">
@@ -50,7 +62,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
 
           {/* Actions */}
           <div className="flex flex-wrap items-center gap-2">
-            {publication.pdfUrl && (
+            {isUsableLink(publication.pdfUrl) && (
               <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.pdfUrl} target="_blank" rel="noopener noreferrer">
                   <FileText className="w-3.5 h-3.5 mr-1.5" />
@@ -58,7 +70,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
                 </a>
               </Button>
             )}
-            {publication.doiUrl && (
+            {isUsableLink(publication.doiUrl) && (
               <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.doiUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
@@ -66,7 +78,7 @@ export function PublicationCard({ publication }: PublicationCardProps) {
                 </a>
               </Button>
             )}
-            {publication.codeUrl && (
+            {isUsableLink(publication.codeUrl) && (
               <Button variant="outline" size="sm" className="rounded-none" asChild>
                 <a href={publication.codeUrl} target="_blank" rel="noopener noreferrer">
                   <Code className="w-3.5 h-3.5 mr-1.5" />
@@ -74,6 +86,12 @@ export function PublicationCard({ publication }: PublicationCardProps) {
                 </a>
               </Button>
             )}
+            <Button variant="outline" size="sm" className="rounded-none" asChild>
+              <a href={scholarUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="w-3.5 h-3.5 mr-1.5" />
+                Scholar
+              </a>
+            </Button>
             {publication.bibtex && (
               <Button
                 variant="outline"

@@ -13,6 +13,7 @@ const navLinks = [
   { href: '/publications', label: 'Publications' },
   { href: '/funding', label: 'Funding' },
   { href: '/timeline', label: 'Lab timeline' },
+  { href: '/awards', label: 'Awards' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
   { href: '/admin/login', label: 'Admin' },

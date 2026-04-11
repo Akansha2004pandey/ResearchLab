@@ -37,6 +37,8 @@ function mapPerson(r: Row): Person {
     googleScholar: r.google_scholar as string | undefined,
     linkedin: r.linkedin as string | undefined,
     website: r.website as string | undefined,
+    github: r.github as string | undefined,
+    twitter: r.twitter as string | undefined,
     yearJoined: r.year_joined as number | undefined,
     yearLeft: r.year_left as number | undefined,
   };

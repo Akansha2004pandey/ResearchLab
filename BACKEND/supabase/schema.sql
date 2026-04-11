@@ -12,6 +12,8 @@ create table if not exists people (
   google_scholar text,
   linkedin text,
   website text,
+  github text,
+  twitter text,
   year_joined int,
   year_left int,
   image_class_name text,
@@ -19,6 +21,9 @@ create table if not exists people (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table people add column if not exists github text;
+alter table people add column if not exists twitter text;
 
 create table if not exists research_areas (
   id text primary key,

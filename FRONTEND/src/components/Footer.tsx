@@ -6,15 +6,17 @@ const quickLinks = [
   { href: '/research', label: 'Research' },
   { href: '/publications', label: 'Publications' },
   { href: '/timeline', label: 'Lab timeline' },
+  { href: '/awards', label: 'Awards' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
 ];
 
 const socialLinks = [
-  { href: 'https://scholar.google.com', label: 'Google Scholar' },
-  { href: 'https://github.com', label: 'GitHub' },
-  { href: 'https://twitter.com', label: 'Twitter/X' },
-  { href: 'https://linkedin.com', label: 'LinkedIn' },
+  { href: 'https://ankursynon.github.io/', label: 'Lab Website' },
+  { href: 'https://scholar.google.com/citations?user=097-HeYAAAAJ', label: 'Google Scholar' },
+  { href: 'https://github.com/ankursynon', label: 'GitHub' },
+  { href: 'https://x.com/ankursynon', label: 'Twitter/X' },
+  { href: 'https://www.linkedin.com/in/ankursynon', label: 'LinkedIn' },
 ];
 
 export function Footer() {

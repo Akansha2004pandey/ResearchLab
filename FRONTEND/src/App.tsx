@@ -9,6 +9,7 @@ import ResearchPage from "./pages/ResearchPage";
 import PublicationsPage from "./pages/PublicationsPage";
 import FundingPage from "./pages/FundingPage";
 import TimelinePage from "./pages/TimelinePage";
+import AwardsPage from "./pages/AwardsPage";
 import NewsPage from "./pages/NewsPage";
 import ContactPage from "./pages/ContactPage";
 import AdminLoginPage from "./pages/AdminLoginPage";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/events" element={<TimelinePage />} />
           <Route path="/gallery" element={<TimelinePage />} />
+          <Route path="/awards" element={<AwardsPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />

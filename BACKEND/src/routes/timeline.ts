@@ -4,6 +4,8 @@ import { ensureNoSupabaseError, parseLimit } from '../utils/api.js';
 
 export const timelineRouter = Router();
 
+const TIMELINE_START_DATE = '2023-02-01';
+
 timelineRouter.get('/', async (req, res, next) => {
   try {
     const type = req.query.type as string | undefined;
@@ -13,6 +15,7 @@ timelineRouter.get('/', async (req, res, next) => {
     let query = supabase
       .from('events')
       .select('*')
+      .gte('date', TIMELINE_START_DATE)
       .order('date', { ascending: false })
       .order('display_order', { ascending: true })
       .limit(limit);

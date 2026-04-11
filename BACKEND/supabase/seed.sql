@@ -129,21 +129,27 @@ set
   image = '/professor-ankur-gupta-square.png',
   bio = 'Dr. Ankur Gupta leads the lab''s research in microfluidics, AI, medical imaging, and intelligent transportation systems.',
   research_interests = ARRAY['Microfluidics', 'Machine Learning', 'Deep Learning', 'Computer Vision'],
+  google_scholar = 'https://scholar.google.com/citations?user=097-HeYAAAAJ',
+  linkedin = 'https://www.linkedin.com/in/ankursynon',
+  website = 'https://ankursynon.github.io/',
+  github = 'https://github.com/ankursynon',
+  twitter = 'https://x.com/ankursynon',
   year_joined = 2023,
   display_order = 1
 where id = 'pi-1';
 
 insert into people (
-  id, name, role, category, image, bio, research_interests, display_order
+  id, name, role, category, image, bio, research_interests, year_left, display_order
 ) values
 (
   'phd-md-imran-hussain',
   'Md Imran Hussain',
   'PhD Scholar',
   'phd',
-  '',
-  'PhD researcher working on resilient AI methods for secure connected systems.',
+  'https://ui-avatars.com/api/?name=Md+Imran+Hussain&background=dbeafe&color=1e3a8a&size=256',
+  'Research focus: resilience for secure connected and cyber-physical systems.',
   ARRAY['Resilient AI', 'Cyber-Physical Security'],
+  null,
   2
 ),
 (
@@ -151,9 +157,10 @@ insert into people (
   'Purrnima Singh',
   'PhD Scholar',
   'phd',
-  '',
-  'PhD researcher exploring machine learning methods for practical real-world deployment.',
+  'https://ui-avatars.com/api/?name=Purrnima+Singh&background=dbeafe&color=1e3a8a&size=256',
+  'Research focus: practical machine learning systems and deployment.',
   ARRAY['Machine Learning', 'Applied AI'],
+  null,
   3
 ),
 (
@@ -161,9 +168,10 @@ insert into people (
   'Yash Gupta',
   'Project Fellow',
   'staff',
-  '',
+  'https://ui-avatars.com/api/?name=Yash+Gupta&background=dbeafe&color=1e3a8a&size=256',
   'Project fellow contributing to funded lab projects in AI and microfluidic design automation.',
   ARRAY['Microfluidics', 'Design Automation'],
+  null,
   4
 ),
 (
@@ -171,9 +179,10 @@ insert into people (
   'Sarthak Agarwal',
   'Summer Intern',
   'staff',
-  '',
-  'Summer intern supporting experimental AI pipelines and literature studies.',
+  'https://ui-avatars.com/api/?name=Sarthak+Agarwal&background=dbeafe&color=1e3a8a&size=256',
+  'Summer intern supporting experimental AI pipelines and model benchmarking.',
   ARRAY['Machine Learning', 'Data Analysis'],
+  null,
   5
 ),
 (
@@ -181,250 +190,253 @@ insert into people (
   'Varun Kumar',
   'Summer Intern',
   'staff',
-  '',
-  'Summer intern assisting research prototypes and benchmark experiments.',
+  'https://ui-avatars.com/api/?name=Varun+Kumar&background=dbeafe&color=1e3a8a&size=256',
+  'Summer intern assisting research prototypes and experiment execution.',
   ARRAY['Applied AI', 'Research Prototyping'],
+  null,
   6
 ),
 (
-  'mtech-rajat-kumar-varshney',
-  'Rajat Kumar Varshney',
+  'mtech-amol',
+  'Amol',
   'M.Tech Scholar',
   'masters',
-  '',
-  'M.Tech researcher working on advanced machine learning model development.',
-  ARRAY['Machine Learning', 'Model Development'],
+  'https://ui-avatars.com/api/?name=Amol&background=dbeafe&color=1e3a8a&size=256',
+  'M.Tech researcher working on model development and evaluation pipelines.',
+  ARRAY['Machine Learning', 'Model Evaluation'],
+  null,
   7
-),
-(
-  'mtech-pankaj',
-  'Pankaj',
-  'M.Tech Scholar',
-  'masters',
-  '',
-  'M.Tech researcher contributing to AI algorithm implementation and evaluation.',
-  ARRAY['Artificial Intelligence', 'Evaluation Methods'],
-  8
-),
-(
-  'mtech-kuldeep-singh',
-  'Kuldeep Singh',
-  'M.Tech Scholar',
-  'masters',
-  '',
-  'M.Tech researcher focused on robust learning methods and deployment workflows.',
-  ARRAY['Robust ML', 'Deployment'],
-  9
 ),
 (
   'mtech-aditya-chouksey',
   'Aditya Chouksey',
   'M.Tech Scholar',
   'masters',
-  '',
-  'M.Tech researcher supporting data-driven system design and optimization.',
-  ARRAY['Optimization', 'Data-Driven Systems'],
-  10
+  'https://ui-avatars.com/api/?name=Aditya+Chouksey&background=dbeafe&color=1e3a8a&size=256',
+  'M.Tech researcher working on optimization and AI system implementation.',
+  ARRAY['Optimization', 'AI Systems'],
+  null,
+  8
 ),
 (
   'btech-vansh-kakkar',
   'Vansh Kakkar',
-  'B.Tech, 4th Year, CSAI',
+  'B.Tech (4th Year, CSAI • Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Vansh+Kakkar&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher working on AI-assisted healthcare applications.',
   ARRAY['Healthcare AI', 'Computer Vision'],
-  11
+  2026,
+  9
 ),
 (
   'btech-madhav-arora',
   'Madhav Arora',
-  'B.Tech, 4th Year, CSAI',
+  'B.Tech (4th Year, CSAI • Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Madhav+Arora&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher contributing to deep learning experiments.',
   ARRAY['Deep Learning', 'Medical AI'],
-  12
+  2026,
+  10
 ),
 (
   'btech-ocean-lakra',
   'Ocean Lakra',
-  'B.Tech, 4th Year, CSE',
+  'B.Tech (4th Year, CSE • Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Ocean+Lakra&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher exploring practical ML deployment techniques.',
   ARRAY['ML Deployment', 'Software Systems'],
-  13
+  2026,
+  11
 ),
 (
   'btech-aniket-negi',
   'Aniket Negi',
-  'B.Tech, 3rd Year, Mechanical',
+  'B.Tech (3rd Year, Mechanical • Class of 2027)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Aniket+Negi&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher supporting interdisciplinary AI engineering tasks.',
   ARRAY['Interdisciplinary AI', 'Engineering Applications'],
-  14
+  2027,
+  12
 ),
 (
   'btech-ayush-thakur',
   'Ayush Thakur',
-  'B.Tech, 3rd Year, CSE',
+  'B.Tech (3rd Year, CSE • Class of 2027)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Ayush+Thakur&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher assisting with data preparation and model training.',
   ARRAY['Data Pipelines', 'Model Training'],
-  15
+  2027,
+  13
 ),
 (
   'btech-deepak',
   'Deepak',
-  'B.Tech, 3rd Year, CSAI',
+  'B.Tech (3rd Year, CSAI • Class of 2027)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Deepak&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher working on foundational AI and analytics tasks.',
   ARRAY['Artificial Intelligence', 'Analytics'],
-  16
+  2027,
+  14
 ),
 (
   'btech-harshdip-saha',
   'Harshdip Saha',
-  'B.Tech, 3rd Year, CSAI',
+  'B.Tech (3rd Year, CSAI • Class of 2027)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Harshdip+Saha&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher supporting experimentation and baseline studies.',
   ARRAY['Experimentation', 'Baseline Models'],
-  17
+  2027,
+  15
 ),
 (
   'btech-harshanth-raja',
   'Harshanth Raja',
-  'B.Tech, 4th Year, CSE',
+  'B.Tech (4th Year, CSE • Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Harshanth+Raja&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher focused on practical implementation and evaluation.',
   ARRAY['Implementation', 'Evaluation'],
-  18
+  2026,
+  16
 ),
 (
   'btech-sameeksha-ahlawat',
   'Sameeksha Ahlawat',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Sameeksha+Ahlawat&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher contributing to ongoing AI project tasks.',
   ARRAY['Applied AI', 'Project Development'],
-  19
+  2026,
+  17
 ),
 (
   'btech-vyshnavi-kotha',
   'Vyshnavi Kotha',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Vyshnavi+Kotha&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher working on model benchmarking and analysis.',
   ARRAY['Benchmarking', 'Model Analysis'],
-  20
+  2026,
+  18
 ),
 (
   'btech-harsh-gahlawat',
   'Harsh Gahlawat',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Harsh+Gahlawat&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher assisting in research implementation workflows.',
   ARRAY['Research Implementation', 'Software Tooling'],
-  21
+  2026,
+  19
 ),
 (
   'btech-kshitij-singh',
   'Kshitij Singh',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Kshitij+Singh&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher supporting experimentation in lab projects.',
   ARRAY['Applied ML', 'Experiments'],
-  22
+  2026,
+  20
 ),
 (
   'btech-gopal-kumar',
   'Gopal Kumar',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Gopal+Kumar&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher focused on data processing and validation.',
   ARRAY['Data Engineering', 'Validation'],
-  23
+  2026,
+  21
 ),
 (
   'btech-mohd-imaad',
   'Mohd Imaad',
-  'B.Tech Undergraduate Researcher',
+  'B.Tech Undergraduate Researcher (Class of 2026)',
   'undergrad',
-  '',
+  'https://ui-avatars.com/api/?name=Mohd+Imaad&background=dbeafe&color=1e3a8a&size=256',
   'Undergraduate researcher contributing to AI prototype development.',
   ARRAY['Prototyping', 'Applied AI'],
-  24
+  2026,
+  22
 ),
 (
   'alumni-vinit-singroha',
   'Vinit Singroha',
-  'Alumni',
+  'B.Tech Alumni (Class of 2024)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Vinit+Singroha&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member with contributions to AI-driven medical imaging projects.',
   ARRAY['Medical Imaging', 'Deep Learning'],
-  25
+  2024,
+  23
 ),
 (
   'alumni-rithik-kumar',
   'Rithik Kumar',
-  'Alumni',
+  'B.Tech Alumni (Class of 2024)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Rithik+Kumar&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member who worked on machine learning methods for healthcare.',
   ARRAY['Healthcare AI', 'Machine Learning'],
-  26
+  2024,
+  24
 ),
 (
   'alumni-farhan-khan',
   'Farhan Khan',
-  'Alumni',
+  'M.Tech Alumni (Class of 2024)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Farhan+Khan&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member with interests in practical AI systems development.',
   ARRAY['AI Systems', 'Software Engineering'],
-  27
+  2024,
+  25
 ),
 (
   'alumni-anant-kumar',
   'Anant Kumar',
-  'Alumni',
+  'B.Tech Alumni (Class of 2025)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Anant+Kumar&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member involved in research implementation and experimentation.',
   ARRAY['Modeling', 'Experimental AI'],
-  28
+  2025,
+  26
 ),
 (
   'alumni-prasad-shivaji-ambekar',
   'Prasad Shivaji Ambekar',
-  'Alumni',
+  'M.Tech Alumni (Class of 2025)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Prasad+Shivaji+Ambekar&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member contributing to projects in computational intelligence.',
   ARRAY['Computational Intelligence', 'Applied ML'],
-  29
+  2025,
+  27
 ),
 (
   'alumni-divyanshu-singh',
   'Divyanshu Singh',
-  'Alumni',
+  'PhD Alumni (Class of 2025)',
   'alumni',
-  '',
+  'https://ui-avatars.com/api/?name=Divyanshu+Singh&background=dbeafe&color=1e3a8a&size=256',
   'Former lab member supporting AI model development and validation.',
   ARRAY['AI Models', 'Validation'],
-  30
+  2025,
+  28
 );
 
 -- ─────────────────────────────────────────────

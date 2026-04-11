@@ -1,5 +1,5 @@
 import { Person } from '@/data/people';
-import { Mail, ExternalLink } from 'lucide-react';
+import { Mail, GraduationCap, Linkedin, Github, Twitter, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface PersonCardProps {
@@ -8,22 +8,27 @@ interface PersonCardProps {
 }
 
 export function PersonCard({ person, featured = false }: PersonCardProps) {
-  const showPhoto = featured && Boolean(person.image);
+  const photoSrc = person.image?.trim()
+    ? person.image
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&background=dbeafe&color=1e3a8a&size=256`;
+
+  const showPhoto = Boolean(photoSrc);
 
   return (
     <div
       className={cn(
         'group exp-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover',
-        showPhoto && 'lg:flex lg:items-start'
+        featured && showPhoto && 'lg:flex lg:items-start'
       )}
     >
       {showPhoto && (
-        <div className="relative overflow-hidden lg:w-80 lg:flex-shrink-0">
+        <div className={cn('relative overflow-hidden', featured ? 'lg:w-80 lg:flex-shrink-0' : 'aspect-[4/3]')}>
           <img
-            src={person.image}
+            src={photoSrc}
             alt={person.name}
             className={cn(
-              'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 aspect-square lg:aspect-auto lg:h-full',
+              'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
+              featured ? 'aspect-square lg:aspect-auto lg:h-full' : '',
               person.imageClassName
             )}
           />
@@ -31,7 +36,7 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
         </div>
       )}
 
-      <div className={cn('p-5', showPhoto && 'lg:p-8 lg:flex-1')}>
+      <div className={cn('p-5', featured && showPhoto && 'lg:p-8 lg:flex-1')}>
         <h3 className={cn('font-heading font-semibold text-foreground mb-1', featured ? 'text-2xl' : 'text-lg')}>
           {person.name}
         </h3>
@@ -72,7 +77,40 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
                   className="text-muted-foreground hover:text-primary transition-colors"
                   title="Google Scholar"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <GraduationCap className="w-4 h-4" />
+                </a>
+              )}
+              {person.linkedin && (
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  title="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              )}
+              {person.github && (
+                <a
+                  href={person.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  title="GitHub"
+                >
+                  <Github className="w-4 h-4" />
+                </a>
+              )}
+              {person.twitter && (
+                <a
+                  href={person.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  title="Twitter/X"
+                >
+                  <Twitter className="w-4 h-4" />
                 </a>
               )}
               {person.website && (
@@ -80,9 +118,10 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
                   href={person.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-primary hover:underline"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  title="Lab Website"
                 >
-                  Website
+                  <Globe className="w-4 h-4" />
                 </a>
               )}
             </div>
