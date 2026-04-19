@@ -130,29 +130,6 @@ export default function PeoplePage() {
           );
         }
 
-        if (category === 'undergrad') {
-          const { groupedByYear, sortedYears } = groupByClassYear(members);
-
-          return (
-            <Section key={category} className="border-t border-border/70">
-              <h2 className="text-2xl font-heading font-semibold text-foreground mb-6">
-                {categoryLabels[category]}
-              </h2>
-
-              <div className="space-y-8">
-                {sortedYears.map((year) => (
-                  <div key={year}>
-                    <h3 className="mb-4 text-lg font-medium text-foreground">
-                      {year === 'Year not specified' ? year : `Class of ${year}`}
-                    </h3>
-                    {renderPersonGrid(groupedByYear[year])}
-                  </div>
-                ))}
-              </div>
-            </Section>
-          );
-        }
-
         if (category === 'alumni') {
           const { groupedByYear, sortedYears } = groupByClassYear(members);
 
