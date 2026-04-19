@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { getYear, parseISO } from 'date-fns';
-import { FolderOpen } from 'lucide-react';
+import { FileImage, FolderOpen } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { PageHeader } from '@/components/PageHeader';
 import { useTimeline } from '@/hooks/useLabData';
@@ -33,7 +33,7 @@ export default function TimelinePage() {
   const eventFolders = useMemo(
     () => timelineEvents.map((event) => ({
       event,
-      cover: event.images[0] || event.posterImage || '',
+      previews: (event.images.length > 0 ? event.images : event.posterImage ? [event.posterImage] : []).slice(0, 3),
       count: event.images.length > 0 ? event.images.length : event.posterImage ? 1 : 0,
     })),
     [timelineEvents]
@@ -58,8 +58,8 @@ export default function TimelinePage() {
   return (
     <Layout>
       <PageHeader
-        title="Lab Timeline"
-        subtitle="A unified view of our conferences, workshops, seminars, and outreach activities. Click any event or the folder icon on the timeline to open its full-screen collage."
+        title="Lab Timeline & Gallery"
+        subtitle="Browse event folders to open full-screen collages, then explore the timeline for the chronological record of lab activities."
       />
 
       <section className="py-8 lg:py-12">
@@ -73,33 +73,56 @@ export default function TimelinePage() {
           ) : (
             <div className="space-y-10">
               <section>
-                <h2 className="mb-4 text-lg font-medium text-foreground">Event folders</h2>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {eventFolders.map(({ event, cover, count }) => (
+                <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+                  <h2 className="text-lg font-medium text-foreground">Gallery folders</h2>
+                  <p className="text-xs text-muted-foreground">Click any folder to open collage</p>
+                </div>
+
+                <div className="overflow-x-auto pb-2">
+                  <div className="flex min-w-max gap-4">
+                    {eventFolders.map(({ event, previews, count }) => (
                     <button
                       key={event.id}
                       type="button"
                       onClick={() => setSelectedEvent(event)}
-                      className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                      title={event.title}
+                      aria-label={`Open collage for ${event.title}`}
+                      className="group w-36 flex-shrink-0 text-left"
                     >
-                      {cover ? (
-                        <img src={cover} alt={event.title} className="h-44 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
-                      ) : (
-                        <div className="flex h-44 w-full items-center justify-center bg-muted/60">
-                          <FolderOpen className="h-10 w-10 text-primary" />
+                      <div className="relative h-24">
+                        <div className="absolute left-3 top-0 h-6 w-16 rounded-t-lg border border-border/70 bg-card" />
+                        <div className="absolute inset-x-0 bottom-0 top-4 overflow-hidden rounded-xl border border-border/70 bg-card p-2 shadow-sm transition-all duration-200 group-hover:-translate-y-0.5 group-hover:shadow-md">
+                          {previews.length > 0 ? (
+                            <div className="relative h-full">
+                              {previews.map((preview, index) => (
+                                <div
+                                  key={`${event.id}-preview-${index}`}
+                                  className="absolute h-12 w-10 overflow-hidden rounded-md border border-border/70 bg-background shadow"
+                                  style={{
+                                    left: `${10 + index * 24}px`,
+                                    top: `${8 + index * 2}px`,
+                                    transform: `rotate(${index === 0 ? -7 : index === 1 ? -2 : 4}deg)`,
+                                  }}
+                                >
+                                  <img src={preview} alt="" className="h-full w-full object-cover" />
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="flex h-full items-center justify-center">
+                              <FolderOpen className="h-8 w-8 text-primary" />
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </div>
 
-                      <div className="p-4">
-                        <div className="mb-2 inline-flex items-center gap-1 rounded-full bg-accent px-2 py-0.5 text-xs text-accent-foreground">
-                          <FolderOpen className="h-3 w-3" />
-                          Folder
-                        </div>
-                        <h3 className="line-clamp-2 text-base font-medium text-foreground">{event.title}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{event.date} • {count} photo{count === 1 ? '' : 's'}</p>
+                      <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                        <FileImage className="h-3.5 w-3.5" />
+                        <span>{count} file{count === 1 ? '' : 's'}</span>
                       </div>
                     </button>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </section>
 
