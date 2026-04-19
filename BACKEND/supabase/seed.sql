@@ -164,6 +164,17 @@ insert into people (
   3
 ),
 (
+  'phd-amol',
+  'Amol',
+  'PhD Scholar',
+  'phd',
+  'https://ui-avatars.com/api/?name=Amol&background=dbeafe&color=1e3a8a&size=256',
+  'Research focus: model development and evaluation pipelines.',
+  ARRAY['Machine Learning', 'Model Evaluation'],
+  null,
+  4
+),
+(
   'fellow-yash-gupta',
   'Yash Gupta',
   'Project Fellow',

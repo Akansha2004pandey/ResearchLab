@@ -61,6 +61,14 @@ export const people: Person[] = [
     bio: 'Research focus: practical machine learning systems and deployment.',
     researchInterests: ['Machine Learning', 'Applied AI'],
   }),
+  member({
+    id: 'phd-amol',
+    name: 'Amol',
+    role: 'PhD Scholar',
+    category: 'phd',
+    bio: 'Research focus: model development and evaluation pipelines.',
+    researchInterests: ['Machine Learning', 'Model Evaluation'],
+  }),
 
   member({
     id: 'fellow-yash-gupta',
