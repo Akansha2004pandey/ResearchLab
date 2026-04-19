@@ -42,9 +42,11 @@ export function PersonCard({ person, featured = false }: PersonCardProps) {
         </h3>
         <p className="text-primary font-medium text-sm mb-3">{person.role}</p>
 
-        <p className={cn('text-muted-foreground text-sm', featured ? 'line-clamp-4 mb-4' : 'line-clamp-3')}>
-          {person.bio}
-        </p>
+        {featured && (
+          <p className="text-muted-foreground text-sm line-clamp-4 mb-4">
+            {person.bio}
+          </p>
+        )}
 
         {featured && (
           <>

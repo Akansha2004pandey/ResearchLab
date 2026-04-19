@@ -11,6 +11,23 @@ const categoryOrder: Person['category'][] = ['faculty', 'phd', 'staff', 'masters
 export default function PeoplePage() {
   const { data: people = [], isLoading } = usePeople();
   const pi = people.find(p => p.id === 'pi-1');
+  const isAllowedMaster = (person: Person) => {
+    const normalized = person.name.trim().toLowerCase();
+    return normalized === 'amol' || normalized === 'aditya chouksey' || normalized === 'aditya';
+  };
+
+  const orderedMasters = (members: Person[]) => {
+    const orderIndex = (person: Person) => {
+      const normalized = person.name.trim().toLowerCase();
+      if (normalized === 'amol') return 0;
+      if (normalized === 'aditya chouksey' || normalized === 'aditya') return 1;
+      return 99;
+    };
+
+    return [...members]
+      .filter(isAllowedMaster)
+      .sort((a, b) => orderIndex(a) - orderIndex(b));
+  };
 
   const groupByClassYear = (members: Person[]) => {
     const groupedByYear = members.reduce<Record<string, Person[]>>((acc, person) => {
@@ -45,7 +62,12 @@ export default function PeoplePage() {
   );
 
   const groupedPeople = categoryOrder.reduce<Record<Person['category'], Person[]>>((acc, category) => {
-    acc[category] = people.filter(p => p.category === category && p.id !== 'pi-1');
+    acc[category] = people.filter((p) => {
+      if (p.id === 'pi-1') return false;
+      if (p.category !== category) return false;
+      if (category === 'masters') return isAllowedMaster(p);
+      return true;
+    });
     return acc;
   }, {} as Record<Person['category'], Person[]>);
 
@@ -150,6 +172,20 @@ export default function PeoplePage() {
                   </div>
                 ))}
               </div>
+            </Section>
+          );
+        }
+
+        if (category === 'masters') {
+          const sortedMasters = orderedMasters(members);
+          if (sortedMasters.length === 0) return null;
+
+          return (
+            <Section key={category} className="border-t border-border/70">
+              <h2 className="text-2xl font-heading font-semibold text-foreground mb-6">
+                {categoryLabels[category]}
+              </h2>
+              {renderPersonGrid(sortedMasters)}
             </Section>
           );
         }
